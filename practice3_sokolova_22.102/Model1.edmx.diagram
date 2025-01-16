@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="cd36b8affbbc4f5ebb32945693fed2a2" Name="Diagram1">
+        <EntityTypeShape EntityType="TravelAgentModel.Agents" Width="1.5" PointX="3" PointY="5.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="TravelAgentModel.Authorizations" Width="1.5" PointX="0.75" PointY="10" IsExpanded="true" />
+        <EntityTypeShape EntityType="TravelAgentModel.Beaches" Width="1.5" PointX="1.5" PointY="28.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="TravelAgentModel.Cities" Width="1.5" PointX="1.5" PointY="31.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="TravelAgentModel.Contacts" Width="1.5" PointX="0.75" PointY="6.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="TravelAgentModel.Contracts" Width="1.5" PointX="0.75" PointY="2.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="TravelAgentModel.Customers" Width="1.5" PointX="6" PointY="5.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="TravelAgentModel.DeparturesDates" Width="1.5" PointX="1.5" PointY="18.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="TravelAgentModel.Directions" Width="1.5" PointX="1.5" PointY="21.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="TravelAgentModel.Documents" Width="1.5" PointX="0.75" PointY="12.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="TravelAgentModel.Excursions" Width="1.5" PointX="6" PointY="26.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="TravelAgentModel.Genders" Width="1.5" PointX="0.75" PointY="15.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="TravelAgentModel.Hotels" Width="1.5" PointX="1.5" PointY="24.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="TravelAgentModel.Intermediaries" Width="1.5" PointX="3" PointY="2.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="TravelAgentModel.IntermediariesReports" Width="1.5" PointX="5.25" PointY="2.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="TravelAgentModel.Requests" Width="1.5" PointX="8.25" PointY="6.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="TravelAgentModel.sysdiagrams" Width="1.5" PointX="8.75" PointY="9.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="TravelAgentModel.TaxReports" Width="1.5" PointX="5.25" PointY="10.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="TravelAgentModel.Tickets" Width="1.5" PointX="6" PointY="21.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="TravelAgentModel.Tours" Width="1.5" PointX="3.75" PointY="22" IsExpanded="true" />
+        <EntityTypeShape EntityType="TravelAgentModel.TicketsCustomers" Width="1.5" PointX="8.25" PointY="3.375" IsExpanded="true" />
+        <AssociationConnector Association="TravelAgentModel.FK_Agents_Authorizations" ManuallyRouted="false" />
+        <AssociationConnector Association="TravelAgentModel.FK_Agents_Contacts" ManuallyRouted="false" />
+        <AssociationConnector Association="TravelAgentModel.FK_Agents_Documents" ManuallyRouted="false" />
+        <AssociationConnector Association="TravelAgentModel.FK_Agents_Genders" ManuallyRouted="false" />
+        <AssociationConnector Association="TravelAgentModel.FK_TaxReports_Agents" ManuallyRouted="false" />
+        <AssociationConnector Association="TravelAgentModel.FK_TicketsCustomers_Agents" ManuallyRouted="false" />
+        <AssociationConnector Association="TravelAgentModel.FK_Customers_Authorizations" ManuallyRouted="false" />
+        <AssociationConnector Association="TravelAgentModel.FK_Customers_Contacts" ManuallyRouted="false" />
+        <AssociationConnector Association="TravelAgentModel.FK_Intermediaries_Contacts" ManuallyRouted="false" />
+        <AssociationConnector Association="TravelAgentModel.FK_Intermediaries_Contracts" ManuallyRouted="false" />
+        <AssociationConnector Association="TravelAgentModel.FK_Customers_Genders" ManuallyRouted="false" />
+        <AssociationConnector Association="TravelAgentModel.FK_Requests_Customers" ManuallyRouted="false" />
+        <AssociationConnector Association="TravelAgentModel.FK_TicketsCustomers_Customers" ManuallyRouted="false" />
+        <AssociationConnector Association="TravelAgentModel.FK_Excursions_Tours" ManuallyRouted="false" />
+        <AssociationConnector Association="TravelAgentModel.FK_Tours_Hotels" ManuallyRouted="false" />
+        <AssociationConnector Association="TravelAgentModel.FK_IntermediariesReports_Intermediaries" ManuallyRouted="false" />
+        <AssociationConnector Association="TravelAgentModel.FK_Tickets_Tours" ManuallyRouted="false" />
+        <AssociationConnector Association="TravelAgentModel.FK_TicketsCustomers_Tickets" ManuallyRouted="false" />
+        <AssociationConnector Association="TravelAgentModel.DirectionsTours" ManuallyRouted="false" />
+        <AssociationConnector Association="TravelAgentModel.HotelsBeaches" ManuallyRouted="false" />
+        <AssociationConnector Association="TravelAgentModel.HotelsCities" ManuallyRouted="false" />
+        <AssociationConnector Association="TravelAgentModel.ToursDepartures" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

@@ -1,0 +1,1585 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="Хранилище TravelAgentModel" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Agents">
+          <Key>
+            <PropertyRef Name="agent_id" />
+          </Key>
+          <Property Name="agent_id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="name" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="surname" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="patronymic" Type="varchar" MaxLength="50" />
+          <Property Name="experience" Type="int" Nullable="false" />
+          <Property Name="birthday" Type="date" Nullable="false" />
+          <Property Name="gender_id" Type="bigint" Nullable="false" />
+          <Property Name="contact_id" Type="bigint" Nullable="false" />
+          <Property Name="document_id" Type="bigint" Nullable="false" />
+          <Property Name="authorization_id" Type="bigint" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Authorizations">
+          <Key>
+            <PropertyRef Name="authorization_id" />
+          </Key>
+          <Property Name="authorization_id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="user_login" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="user_password" Type="varchar" MaxLength="256" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Beaches">
+          <Key>
+            <PropertyRef Name="beach_id" />
+          </Key>
+          <Property Name="beach_id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="beach_name" Type="varchar(max)" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Cities">
+          <Key>
+            <PropertyRef Name="city_id" />
+          </Key>
+          <Property Name="city_id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="city_name" Type="varchar(max)" Nullable="false" />
+          <Property Name="country_name" Type="varchar(max)" />
+        </EntityType>
+        <EntityType Name="Contacts">
+          <Key>
+            <PropertyRef Name="contact_id" />
+          </Key>
+          <Property Name="contact_id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="phone_number" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="extra_phone_number" Type="varchar" MaxLength="50" />
+          <Property Name="email_address" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Contracts">
+          <Key>
+            <PropertyRef Name="contract_id" />
+          </Key>
+          <Property Name="contract_id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="contract_number" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="contract_name" Type="varchar(max)" Nullable="false" />
+          <Property Name="contract_date" Type="date" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Customers">
+          <Key>
+            <PropertyRef Name="customer_id" />
+          </Key>
+          <Property Name="customer_id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="name" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="surname" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="patronymic" Type="varchar" MaxLength="50" />
+          <Property Name="birthday" Type="date" Nullable="false" />
+          <Property Name="gender_id" Type="bigint" Nullable="false" />
+          <Property Name="contact_id" Type="bigint" Nullable="false" />
+          <Property Name="authorization_id" Type="bigint" Nullable="false" />
+        </EntityType>
+        <EntityType Name="DeparturesDates">
+          <Key>
+            <PropertyRef Name="departure_date_id" />
+          </Key>
+          <Property Name="departure_date_id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="departure_start_date" Type="date" Nullable="false" />
+          <Property Name="departure_end_date" Type="date" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Directions">
+          <Key>
+            <PropertyRef Name="direction_id" />
+          </Key>
+          <Property Name="direction_id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="name" Type="varchar(max)" Nullable="false" />
+          <Property Name="desctiption" Type="varchar(max)" Nullable="false" />
+        </EntityType>
+        <!--Ошибки, обнаруженные при создании:
+предупреждение 6002: В таблице или представлении "TravelAgent.dbo.DirectionsTours" не определен первичный ключ. Ключ был выведен, а определение таблицы или представления было создано в режиме только для чтения.-->
+        <EntityType Name="DirectionsTours">
+          <Key>
+            <PropertyRef Name="direction_id" />
+            <PropertyRef Name="tour_id" />
+          </Key>
+          <Property Name="direction_id" Type="bigint" Nullable="false" />
+          <Property Name="tour_id" Type="bigint" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Documents">
+          <Key>
+            <PropertyRef Name="document_id" />
+          </Key>
+          <Property Name="document_id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="passport_series" Type="int" Nullable="false" />
+          <Property Name="passport_number" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Excursions">
+          <Key>
+            <PropertyRef Name="excursion_id" />
+          </Key>
+          <Property Name="excursion_id" Type="bigint" Nullable="false" />
+          <Property Name="name" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="description" Type="varchar(max)" Nullable="false" />
+          <Property Name="cost" Type="money" Nullable="false" />
+          <Property Name="tour_id" Type="bigint" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Genders">
+          <Key>
+            <PropertyRef Name="gender_id" />
+          </Key>
+          <Property Name="gender_id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="name" Type="varchar" MaxLength="3" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Hotels">
+          <Key>
+            <PropertyRef Name="hotel_id" />
+          </Key>
+          <Property Name="hotel_id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="hotel_name" Type="varchar(max)" Nullable="false" />
+          <Property Name="description" Type="varchar(max)" Nullable="false" />
+          <Property Name="hotel_class" Type="int" Nullable="false" />
+          <Property Name="city_id" Type="bigint" Nullable="false" />
+          <Property Name="beach_id" Type="bigint" Nullable="false" />
+        </EntityType>
+        <!--Ошибки, обнаруженные при создании:
+предупреждение 6002: В таблице или представлении "TravelAgent.dbo.HotelsBeaches" не определен первичный ключ. Ключ был выведен, а определение таблицы или представления было создано в режиме только для чтения.-->
+        <EntityType Name="HotelsBeaches">
+          <Key>
+            <PropertyRef Name="hotel_id" />
+            <PropertyRef Name="beach_id" />
+          </Key>
+          <Property Name="hotel_id" Type="bigint" Nullable="false" />
+          <Property Name="beach_id" Type="bigint" Nullable="false" />
+        </EntityType>
+        <!--Ошибки, обнаруженные при создании:
+предупреждение 6002: В таблице или представлении "TravelAgent.dbo.HotelsCities" не определен первичный ключ. Ключ был выведен, а определение таблицы или представления было создано в режиме только для чтения.-->
+        <EntityType Name="HotelsCities">
+          <Key>
+            <PropertyRef Name="hotel_id" />
+            <PropertyRef Name="city_id" />
+          </Key>
+          <Property Name="hotel_id" Type="bigint" Nullable="false" />
+          <Property Name="city_id" Type="bigint" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Intermediaries">
+          <Key>
+            <PropertyRef Name="intermediary_id" />
+          </Key>
+          <Property Name="intermediary_id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="name" Type="varchar(max)" Nullable="false" />
+          <Property Name="contact_id" Type="bigint" Nullable="false" />
+          <Property Name="contract_id" Type="bigint" Nullable="false" />
+        </EntityType>
+        <EntityType Name="IntermediariesReports">
+          <Key>
+            <PropertyRef Name="report_id" />
+          </Key>
+          <Property Name="report_id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="report_number" Type="int" Nullable="false" />
+          <Property Name="report_name" Type="varchar(max)" Nullable="false" />
+          <Property Name="report_date" Type="date" Nullable="false" />
+          <Property Name="intermediary_id" Type="bigint" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Requests">
+          <Key>
+            <PropertyRef Name="request_id" />
+          </Key>
+          <Property Name="request_id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="description" Type="varchar(max)" Nullable="false" />
+          <Property Name="customer_id" Type="bigint" Nullable="false" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="principal_id" Type="int" Nullable="false" />
+          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="version" Type="int" />
+          <Property Name="definition" Type="varbinary(max)" />
+        </EntityType>
+        <EntityType Name="TaxReports">
+          <Key>
+            <PropertyRef Name="tax_report_id" />
+          </Key>
+          <Property Name="tax_report_id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="tax_report_number" Type="int" Nullable="false" />
+          <Property Name="agent_id" Type="bigint" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Tickets">
+          <Key>
+            <PropertyRef Name="ticket_id" />
+          </Key>
+          <Property Name="ticket_id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="departure_from" Type="datetime" Nullable="false" />
+          <Property Name="arrival_to" Type="datetime" Nullable="false" />
+          <Property Name="nights_count" Type="int" Nullable="false" />
+          <Property Name="cost" Type="money" Nullable="false" />
+          <Property Name="tour_id" Type="bigint" Nullable="false" />
+          <Property Name="customer_id" Type="bigint" Nullable="false" />
+          <Property Name="agent_id" Type="bigint" Nullable="false" />
+        </EntityType>
+        <!--Ошибки, обнаруженные при создании:
+предупреждение 6002: В таблице или представлении "TravelAgent.dbo.TicketsCustomers" не определен первичный ключ. Ключ был выведен, а определение таблицы или представления было создано в режиме только для чтения.-->
+        <EntityType Name="TicketsCustomers">
+          <Key>
+            <PropertyRef Name="ticket_id" />
+            <PropertyRef Name="customer_id" />
+            <PropertyRef Name="agent_id" />
+          </Key>
+          <Property Name="ticket_id" Type="bigint" Nullable="false" />
+          <Property Name="customer_id" Type="bigint" Nullable="false" />
+          <Property Name="agent_id" Type="bigint" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Tours">
+          <Key>
+            <PropertyRef Name="tour_id" />
+          </Key>
+          <Property Name="tour_id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="hotel_id" Type="bigint" Nullable="false" />
+          <Property Name="departure_date_id" Type="bigint" Nullable="false" />
+          <Property Name="cost" Type="money" Nullable="false" />
+        </EntityType>
+        <!--Ошибки, обнаруженные при создании:
+предупреждение 6002: В таблице или представлении "TravelAgent.dbo.ToursDepartures" не определен первичный ключ. Ключ был выведен, а определение таблицы или представления было создано в режиме только для чтения.-->
+        <EntityType Name="ToursDepartures">
+          <Key>
+            <PropertyRef Name="tour_id" />
+            <PropertyRef Name="departure_date_id" />
+          </Key>
+          <Property Name="tour_id" Type="bigint" Nullable="false" />
+          <Property Name="departure_date_id" Type="bigint" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_Agents_Authorizations">
+          <End Role="Authorizations" Type="Self.Authorizations" Multiplicity="1" />
+          <End Role="Agents" Type="Self.Agents" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Authorizations">
+              <PropertyRef Name="authorization_id" />
+            </Principal>
+            <Dependent Role="Agents">
+              <PropertyRef Name="authorization_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Agents_Contacts">
+          <End Role="Contacts" Type="Self.Contacts" Multiplicity="1" />
+          <End Role="Agents" Type="Self.Agents" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Contacts">
+              <PropertyRef Name="contact_id" />
+            </Principal>
+            <Dependent Role="Agents">
+              <PropertyRef Name="contact_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Agents_Documents">
+          <End Role="Documents" Type="Self.Documents" Multiplicity="1" />
+          <End Role="Agents" Type="Self.Agents" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Documents">
+              <PropertyRef Name="document_id" />
+            </Principal>
+            <Dependent Role="Agents">
+              <PropertyRef Name="document_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Agents_Genders">
+          <End Role="Genders" Type="Self.Genders" Multiplicity="1" />
+          <End Role="Agents" Type="Self.Agents" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Genders">
+              <PropertyRef Name="gender_id" />
+            </Principal>
+            <Dependent Role="Agents">
+              <PropertyRef Name="gender_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Customers_Authorizations">
+          <End Role="Authorizations" Type="Self.Authorizations" Multiplicity="1" />
+          <End Role="Customers" Type="Self.Customers" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Authorizations">
+              <PropertyRef Name="authorization_id" />
+            </Principal>
+            <Dependent Role="Customers">
+              <PropertyRef Name="authorization_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Customers_Contacts">
+          <End Role="Contacts" Type="Self.Contacts" Multiplicity="1" />
+          <End Role="Customers" Type="Self.Customers" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Contacts">
+              <PropertyRef Name="contact_id" />
+            </Principal>
+            <Dependent Role="Customers">
+              <PropertyRef Name="contact_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Customers_Genders">
+          <End Role="Genders" Type="Self.Genders" Multiplicity="1" />
+          <End Role="Customers" Type="Self.Customers" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Genders">
+              <PropertyRef Name="gender_id" />
+            </Principal>
+            <Dependent Role="Customers">
+              <PropertyRef Name="gender_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DirectionsTours_Directions">
+          <End Role="Directions" Type="Self.Directions" Multiplicity="1" />
+          <End Role="DirectionsTours" Type="Self.DirectionsTours" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Directions">
+              <PropertyRef Name="direction_id" />
+            </Principal>
+            <Dependent Role="DirectionsTours">
+              <PropertyRef Name="direction_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DirectionsTours_Tours">
+          <End Role="Tours" Type="Self.Tours" Multiplicity="1" />
+          <End Role="DirectionsTours" Type="Self.DirectionsTours" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tours">
+              <PropertyRef Name="tour_id" />
+            </Principal>
+            <Dependent Role="DirectionsTours">
+              <PropertyRef Name="tour_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Excursions_Tours">
+          <End Role="Tours" Type="Self.Tours" Multiplicity="1" />
+          <End Role="Excursions" Type="Self.Excursions" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tours">
+              <PropertyRef Name="tour_id" />
+            </Principal>
+            <Dependent Role="Excursions">
+              <PropertyRef Name="tour_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_HotelsBeaches_Beaches">
+          <End Role="Beaches" Type="Self.Beaches" Multiplicity="1" />
+          <End Role="HotelsBeaches" Type="Self.HotelsBeaches" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Beaches">
+              <PropertyRef Name="beach_id" />
+            </Principal>
+            <Dependent Role="HotelsBeaches">
+              <PropertyRef Name="beach_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_HotelsBeaches_Hotels">
+          <End Role="Hotels" Type="Self.Hotels" Multiplicity="1" />
+          <End Role="HotelsBeaches" Type="Self.HotelsBeaches" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Hotels">
+              <PropertyRef Name="hotel_id" />
+            </Principal>
+            <Dependent Role="HotelsBeaches">
+              <PropertyRef Name="hotel_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_HotelsCities_Cities">
+          <End Role="Cities" Type="Self.Cities" Multiplicity="1" />
+          <End Role="HotelsCities" Type="Self.HotelsCities" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Cities">
+              <PropertyRef Name="city_id" />
+            </Principal>
+            <Dependent Role="HotelsCities">
+              <PropertyRef Name="city_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_HotelsCities_Hotels">
+          <End Role="Hotels" Type="Self.Hotels" Multiplicity="1" />
+          <End Role="HotelsCities" Type="Self.HotelsCities" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Hotels">
+              <PropertyRef Name="hotel_id" />
+            </Principal>
+            <Dependent Role="HotelsCities">
+              <PropertyRef Name="hotel_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Intermediaries_Contacts">
+          <End Role="Contacts" Type="Self.Contacts" Multiplicity="1" />
+          <End Role="Intermediaries" Type="Self.Intermediaries" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Contacts">
+              <PropertyRef Name="contact_id" />
+            </Principal>
+            <Dependent Role="Intermediaries">
+              <PropertyRef Name="contact_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Intermediaries_Contracts">
+          <End Role="Contracts" Type="Self.Contracts" Multiplicity="1" />
+          <End Role="Intermediaries" Type="Self.Intermediaries" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Contracts">
+              <PropertyRef Name="contract_id" />
+            </Principal>
+            <Dependent Role="Intermediaries">
+              <PropertyRef Name="contract_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_IntermediariesReports_Intermediaries">
+          <End Role="Intermediaries" Type="Self.Intermediaries" Multiplicity="1" />
+          <End Role="IntermediariesReports" Type="Self.IntermediariesReports" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Intermediaries">
+              <PropertyRef Name="intermediary_id" />
+            </Principal>
+            <Dependent Role="IntermediariesReports">
+              <PropertyRef Name="intermediary_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Requests_Customers">
+          <End Role="Customers" Type="Self.Customers" Multiplicity="1" />
+          <End Role="Requests" Type="Self.Requests" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Customers">
+              <PropertyRef Name="customer_id" />
+            </Principal>
+            <Dependent Role="Requests">
+              <PropertyRef Name="customer_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TaxReports_Agents">
+          <End Role="Agents" Type="Self.Agents" Multiplicity="1" />
+          <End Role="TaxReports" Type="Self.TaxReports" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Agents">
+              <PropertyRef Name="agent_id" />
+            </Principal>
+            <Dependent Role="TaxReports">
+              <PropertyRef Name="agent_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Tickets_Tours">
+          <End Role="Tours" Type="Self.Tours" Multiplicity="1" />
+          <End Role="Tickets" Type="Self.Tickets" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tours">
+              <PropertyRef Name="tour_id" />
+            </Principal>
+            <Dependent Role="Tickets">
+              <PropertyRef Name="tour_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TicketsCustomers_Agents">
+          <End Role="Agents" Type="Self.Agents" Multiplicity="1" />
+          <End Role="TicketsCustomers" Type="Self.TicketsCustomers" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Agents">
+              <PropertyRef Name="agent_id" />
+            </Principal>
+            <Dependent Role="TicketsCustomers">
+              <PropertyRef Name="agent_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TicketsCustomers_Customers">
+          <End Role="Customers" Type="Self.Customers" Multiplicity="1" />
+          <End Role="TicketsCustomers" Type="Self.TicketsCustomers" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Customers">
+              <PropertyRef Name="customer_id" />
+            </Principal>
+            <Dependent Role="TicketsCustomers">
+              <PropertyRef Name="customer_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TicketsCustomers_Tickets">
+          <End Role="Tickets" Type="Self.Tickets" Multiplicity="1" />
+          <End Role="TicketsCustomers" Type="Self.TicketsCustomers" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tickets">
+              <PropertyRef Name="ticket_id" />
+            </Principal>
+            <Dependent Role="TicketsCustomers">
+              <PropertyRef Name="ticket_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Tours_Hotels">
+          <End Role="Hotels" Type="Self.Hotels" Multiplicity="1" />
+          <End Role="Tours" Type="Self.Tours" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Hotels">
+              <PropertyRef Name="hotel_id" />
+            </Principal>
+            <Dependent Role="Tours">
+              <PropertyRef Name="hotel_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ToursDepartures_DeparturesDates">
+          <End Role="DeparturesDates" Type="Self.DeparturesDates" Multiplicity="1" />
+          <End Role="ToursDepartures" Type="Self.ToursDepartures" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DeparturesDates">
+              <PropertyRef Name="departure_date_id" />
+            </Principal>
+            <Dependent Role="ToursDepartures">
+              <PropertyRef Name="departure_date_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ToursDepartures_Tours">
+          <End Role="Tours" Type="Self.Tours" Multiplicity="1" />
+          <End Role="ToursDepartures" Type="Self.ToursDepartures" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tours">
+              <PropertyRef Name="tour_id" />
+            </Principal>
+            <Dependent Role="ToursDepartures">
+              <PropertyRef Name="tour_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="Хранилище TravelAgentModelContainer">
+          <EntitySet Name="Agents" EntityType="Self.Agents" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Authorizations" EntityType="Self.Authorizations" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Beaches" EntityType="Self.Beaches" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Cities" EntityType="Self.Cities" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Contacts" EntityType="Self.Contacts" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Contracts" EntityType="Self.Contracts" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Customers" EntityType="Self.Customers" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="DeparturesDates" EntityType="Self.DeparturesDates" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Directions" EntityType="Self.Directions" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Documents" EntityType="Self.Documents" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Excursions" EntityType="Self.Excursions" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Genders" EntityType="Self.Genders" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Hotels" EntityType="Self.Hotels" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Intermediaries" EntityType="Self.Intermediaries" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="IntermediariesReports" EntityType="Self.IntermediariesReports" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Requests" EntityType="Self.Requests" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TaxReports" EntityType="Self.TaxReports" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Tickets" EntityType="Self.Tickets" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Tours" EntityType="Self.Tours" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="DirectionsTours" EntityType="Self.DirectionsTours" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [DirectionsTours].[direction_id] AS [direction_id], 
+    [DirectionsTours].[tour_id] AS [tour_id]
+    FROM [dbo].[DirectionsTours] AS [DirectionsTours]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="HotelsBeaches" EntityType="Self.HotelsBeaches" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [HotelsBeaches].[hotel_id] AS [hotel_id], 
+    [HotelsBeaches].[beach_id] AS [beach_id]
+    FROM [dbo].[HotelsBeaches] AS [HotelsBeaches]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="HotelsCities" EntityType="Self.HotelsCities" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [HotelsCities].[hotel_id] AS [hotel_id], 
+    [HotelsCities].[city_id] AS [city_id]
+    FROM [dbo].[HotelsCities] AS [HotelsCities]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="TicketsCustomers" EntityType="Self.TicketsCustomers" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [TicketsCustomers].[ticket_id] AS [ticket_id], 
+    [TicketsCustomers].[customer_id] AS [customer_id], 
+    [TicketsCustomers].[agent_id] AS [agent_id]
+    FROM [dbo].[TicketsCustomers] AS [TicketsCustomers]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="ToursDepartures" EntityType="Self.ToursDepartures" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [ToursDepartures].[tour_id] AS [tour_id], 
+    [ToursDepartures].[departure_date_id] AS [departure_date_id]
+    FROM [dbo].[ToursDepartures] AS [ToursDepartures]</DefiningQuery>
+          </EntitySet>
+          <AssociationSet Name="FK_Agents_Authorizations" Association="Self.FK_Agents_Authorizations">
+            <End Role="Authorizations" EntitySet="Authorizations" />
+            <End Role="Agents" EntitySet="Agents" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Agents_Contacts" Association="Self.FK_Agents_Contacts">
+            <End Role="Contacts" EntitySet="Contacts" />
+            <End Role="Agents" EntitySet="Agents" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Agents_Documents" Association="Self.FK_Agents_Documents">
+            <End Role="Documents" EntitySet="Documents" />
+            <End Role="Agents" EntitySet="Agents" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Agents_Genders" Association="Self.FK_Agents_Genders">
+            <End Role="Genders" EntitySet="Genders" />
+            <End Role="Agents" EntitySet="Agents" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Customers_Authorizations" Association="Self.FK_Customers_Authorizations">
+            <End Role="Authorizations" EntitySet="Authorizations" />
+            <End Role="Customers" EntitySet="Customers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Customers_Contacts" Association="Self.FK_Customers_Contacts">
+            <End Role="Contacts" EntitySet="Contacts" />
+            <End Role="Customers" EntitySet="Customers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Customers_Genders" Association="Self.FK_Customers_Genders">
+            <End Role="Genders" EntitySet="Genders" />
+            <End Role="Customers" EntitySet="Customers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DirectionsTours_Directions" Association="Self.FK_DirectionsTours_Directions">
+            <End Role="Directions" EntitySet="Directions" />
+            <End Role="DirectionsTours" EntitySet="DirectionsTours" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DirectionsTours_Tours" Association="Self.FK_DirectionsTours_Tours">
+            <End Role="Tours" EntitySet="Tours" />
+            <End Role="DirectionsTours" EntitySet="DirectionsTours" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Excursions_Tours" Association="Self.FK_Excursions_Tours">
+            <End Role="Tours" EntitySet="Tours" />
+            <End Role="Excursions" EntitySet="Excursions" />
+          </AssociationSet>
+          <AssociationSet Name="FK_HotelsBeaches_Beaches" Association="Self.FK_HotelsBeaches_Beaches">
+            <End Role="Beaches" EntitySet="Beaches" />
+            <End Role="HotelsBeaches" EntitySet="HotelsBeaches" />
+          </AssociationSet>
+          <AssociationSet Name="FK_HotelsBeaches_Hotels" Association="Self.FK_HotelsBeaches_Hotels">
+            <End Role="Hotels" EntitySet="Hotels" />
+            <End Role="HotelsBeaches" EntitySet="HotelsBeaches" />
+          </AssociationSet>
+          <AssociationSet Name="FK_HotelsCities_Cities" Association="Self.FK_HotelsCities_Cities">
+            <End Role="Cities" EntitySet="Cities" />
+            <End Role="HotelsCities" EntitySet="HotelsCities" />
+          </AssociationSet>
+          <AssociationSet Name="FK_HotelsCities_Hotels" Association="Self.FK_HotelsCities_Hotels">
+            <End Role="Hotels" EntitySet="Hotels" />
+            <End Role="HotelsCities" EntitySet="HotelsCities" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Intermediaries_Contacts" Association="Self.FK_Intermediaries_Contacts">
+            <End Role="Contacts" EntitySet="Contacts" />
+            <End Role="Intermediaries" EntitySet="Intermediaries" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Intermediaries_Contracts" Association="Self.FK_Intermediaries_Contracts">
+            <End Role="Contracts" EntitySet="Contracts" />
+            <End Role="Intermediaries" EntitySet="Intermediaries" />
+          </AssociationSet>
+          <AssociationSet Name="FK_IntermediariesReports_Intermediaries" Association="Self.FK_IntermediariesReports_Intermediaries">
+            <End Role="Intermediaries" EntitySet="Intermediaries" />
+            <End Role="IntermediariesReports" EntitySet="IntermediariesReports" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Requests_Customers" Association="Self.FK_Requests_Customers">
+            <End Role="Customers" EntitySet="Customers" />
+            <End Role="Requests" EntitySet="Requests" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TaxReports_Agents" Association="Self.FK_TaxReports_Agents">
+            <End Role="Agents" EntitySet="Agents" />
+            <End Role="TaxReports" EntitySet="TaxReports" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Tickets_Tours" Association="Self.FK_Tickets_Tours">
+            <End Role="Tours" EntitySet="Tours" />
+            <End Role="Tickets" EntitySet="Tickets" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TicketsCustomers_Agents" Association="Self.FK_TicketsCustomers_Agents">
+            <End Role="Agents" EntitySet="Agents" />
+            <End Role="TicketsCustomers" EntitySet="TicketsCustomers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TicketsCustomers_Customers" Association="Self.FK_TicketsCustomers_Customers">
+            <End Role="Customers" EntitySet="Customers" />
+            <End Role="TicketsCustomers" EntitySet="TicketsCustomers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TicketsCustomers_Tickets" Association="Self.FK_TicketsCustomers_Tickets">
+            <End Role="Tickets" EntitySet="Tickets" />
+            <End Role="TicketsCustomers" EntitySet="TicketsCustomers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Tours_Hotels" Association="Self.FK_Tours_Hotels">
+            <End Role="Hotels" EntitySet="Hotels" />
+            <End Role="Tours" EntitySet="Tours" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ToursDepartures_DeparturesDates" Association="Self.FK_ToursDepartures_DeparturesDates">
+            <End Role="DeparturesDates" EntitySet="DeparturesDates" />
+            <End Role="ToursDepartures" EntitySet="ToursDepartures" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ToursDepartures_Tours" Association="Self.FK_ToursDepartures_Tours">
+            <End Role="Tours" EntitySet="Tours" />
+            <End Role="ToursDepartures" EntitySet="ToursDepartures" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="TravelAgentModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Agents">
+          <Key>
+            <PropertyRef Name="agent_id" />
+          </Key>
+          <Property Name="agent_id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="surname" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="patronymic" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="experience" Type="Int32" Nullable="false" />
+          <Property Name="birthday" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="gender_id" Type="Int64" Nullable="false" />
+          <Property Name="contact_id" Type="Int64" Nullable="false" />
+          <Property Name="document_id" Type="Int64" Nullable="false" />
+          <Property Name="authorization_id" Type="Int64" Nullable="false" />
+          <NavigationProperty Name="Authorizations" Relationship="Self.FK_Agents_Authorizations" FromRole="Agents" ToRole="Authorizations" />
+          <NavigationProperty Name="Contacts" Relationship="Self.FK_Agents_Contacts" FromRole="Agents" ToRole="Contacts" />
+          <NavigationProperty Name="Documents" Relationship="Self.FK_Agents_Documents" FromRole="Agents" ToRole="Documents" />
+          <NavigationProperty Name="Genders" Relationship="Self.FK_Agents_Genders" FromRole="Agents" ToRole="Genders" />
+          <NavigationProperty Name="TaxReports" Relationship="Self.FK_TaxReports_Agents" FromRole="Agents" ToRole="TaxReports" />
+          <NavigationProperty Name="TicketsCustomers" Relationship="Self.FK_TicketsCustomers_Agents" FromRole="Agents" ToRole="TicketsCustomers" />
+        </EntityType>
+        <EntityType Name="Authorizations">
+          <Key>
+            <PropertyRef Name="authorization_id" />
+          </Key>
+          <Property Name="authorization_id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="user_login" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="user_password" Type="String" MaxLength="256" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Agents" Relationship="Self.FK_Agents_Authorizations" FromRole="Authorizations" ToRole="Agents" />
+          <NavigationProperty Name="Customers" Relationship="Self.FK_Customers_Authorizations" FromRole="Authorizations" ToRole="Customers" />
+        </EntityType>
+        <EntityType Name="Beaches">
+          <Key>
+            <PropertyRef Name="beach_id" />
+          </Key>
+          <Property Name="beach_id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="beach_name" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Hotels" Relationship="Self.HotelsBeaches" FromRole="Beaches" ToRole="Hotels" />
+        </EntityType>
+        <EntityType Name="Cities">
+          <Key>
+            <PropertyRef Name="city_id" />
+          </Key>
+          <Property Name="city_id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="city_name" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="country_name" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Hotels" Relationship="Self.HotelsCities" FromRole="Cities" ToRole="Hotels" />
+        </EntityType>
+        <EntityType Name="Contacts">
+          <Key>
+            <PropertyRef Name="contact_id" />
+          </Key>
+          <Property Name="contact_id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="phone_number" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="extra_phone_number" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="email_address" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Agents" Relationship="Self.FK_Agents_Contacts" FromRole="Contacts" ToRole="Agents" />
+          <NavigationProperty Name="Customers" Relationship="Self.FK_Customers_Contacts" FromRole="Contacts" ToRole="Customers" />
+          <NavigationProperty Name="Intermediaries" Relationship="Self.FK_Intermediaries_Contacts" FromRole="Contacts" ToRole="Intermediaries" />
+        </EntityType>
+        <EntityType Name="Contracts">
+          <Key>
+            <PropertyRef Name="contract_id" />
+          </Key>
+          <Property Name="contract_id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="contract_number" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="contract_name" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="contract_date" Type="DateTime" Nullable="false" Precision="0" />
+          <NavigationProperty Name="Intermediaries" Relationship="Self.FK_Intermediaries_Contracts" FromRole="Contracts" ToRole="Intermediaries" />
+        </EntityType>
+        <EntityType Name="Customers">
+          <Key>
+            <PropertyRef Name="customer_id" />
+          </Key>
+          <Property Name="customer_id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="surname" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="patronymic" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="birthday" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="gender_id" Type="Int64" Nullable="false" />
+          <Property Name="contact_id" Type="Int64" Nullable="false" />
+          <Property Name="authorization_id" Type="Int64" Nullable="false" />
+          <NavigationProperty Name="Authorizations" Relationship="Self.FK_Customers_Authorizations" FromRole="Customers" ToRole="Authorizations" />
+          <NavigationProperty Name="Contacts" Relationship="Self.FK_Customers_Contacts" FromRole="Customers" ToRole="Contacts" />
+          <NavigationProperty Name="Genders" Relationship="Self.FK_Customers_Genders" FromRole="Customers" ToRole="Genders" />
+          <NavigationProperty Name="Requests" Relationship="Self.FK_Requests_Customers" FromRole="Customers" ToRole="Requests" />
+          <NavigationProperty Name="TicketsCustomers" Relationship="Self.FK_TicketsCustomers_Customers" FromRole="Customers" ToRole="TicketsCustomers" />
+        </EntityType>
+        <EntityType Name="DeparturesDates">
+          <Key>
+            <PropertyRef Name="departure_date_id" />
+          </Key>
+          <Property Name="departure_date_id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="departure_start_date" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="departure_end_date" Type="DateTime" Nullable="false" Precision="0" />
+          <NavigationProperty Name="Tours" Relationship="Self.ToursDepartures" FromRole="DeparturesDates" ToRole="Tours" />
+        </EntityType>
+        <EntityType Name="Directions">
+          <Key>
+            <PropertyRef Name="direction_id" />
+          </Key>
+          <Property Name="direction_id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="name" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="desctiption" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Tours" Relationship="Self.DirectionsTours" FromRole="Directions" ToRole="Tours" />
+        </EntityType>
+        <EntityType Name="Documents">
+          <Key>
+            <PropertyRef Name="document_id" />
+          </Key>
+          <Property Name="document_id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="passport_series" Type="Int32" Nullable="false" />
+          <Property Name="passport_number" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Agents" Relationship="Self.FK_Agents_Documents" FromRole="Documents" ToRole="Agents" />
+        </EntityType>
+        <EntityType Name="Excursions">
+          <Key>
+            <PropertyRef Name="excursion_id" />
+          </Key>
+          <Property Name="excursion_id" Type="Int64" Nullable="false" />
+          <Property Name="name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="description" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="cost" Type="Decimal" Precision="19" Scale="4" Nullable="false" />
+          <Property Name="tour_id" Type="Int64" Nullable="false" />
+          <NavigationProperty Name="Tours" Relationship="Self.FK_Excursions_Tours" FromRole="Excursions" ToRole="Tours" />
+        </EntityType>
+        <EntityType Name="Genders">
+          <Key>
+            <PropertyRef Name="gender_id" />
+          </Key>
+          <Property Name="gender_id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="name" Type="String" MaxLength="3" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Agents" Relationship="Self.FK_Agents_Genders" FromRole="Genders" ToRole="Agents" />
+          <NavigationProperty Name="Customers" Relationship="Self.FK_Customers_Genders" FromRole="Genders" ToRole="Customers" />
+        </EntityType>
+        <EntityType Name="Hotels">
+          <Key>
+            <PropertyRef Name="hotel_id" />
+          </Key>
+          <Property Name="hotel_id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="hotel_name" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="description" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="hotel_class" Type="Int32" Nullable="false" />
+          <Property Name="city_id" Type="Int64" Nullable="false" />
+          <Property Name="beach_id" Type="Int64" Nullable="false" />
+          <NavigationProperty Name="Tours" Relationship="Self.FK_Tours_Hotels" FromRole="Hotels" ToRole="Tours" />
+          <NavigationProperty Name="Beaches" Relationship="Self.HotelsBeaches" FromRole="Hotels" ToRole="Beaches" />
+          <NavigationProperty Name="Cities" Relationship="Self.HotelsCities" FromRole="Hotels" ToRole="Cities" />
+        </EntityType>
+        <EntityType Name="Intermediaries">
+          <Key>
+            <PropertyRef Name="intermediary_id" />
+          </Key>
+          <Property Name="intermediary_id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="name" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="contact_id" Type="Int64" Nullable="false" />
+          <Property Name="contract_id" Type="Int64" Nullable="false" />
+          <NavigationProperty Name="Contacts" Relationship="Self.FK_Intermediaries_Contacts" FromRole="Intermediaries" ToRole="Contacts" />
+          <NavigationProperty Name="Contracts" Relationship="Self.FK_Intermediaries_Contracts" FromRole="Intermediaries" ToRole="Contracts" />
+          <NavigationProperty Name="IntermediariesReports" Relationship="Self.FK_IntermediariesReports_Intermediaries" FromRole="Intermediaries" ToRole="IntermediariesReports" />
+        </EntityType>
+        <EntityType Name="IntermediariesReports">
+          <Key>
+            <PropertyRef Name="report_id" />
+          </Key>
+          <Property Name="report_id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="report_number" Type="Int32" Nullable="false" />
+          <Property Name="report_name" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="report_date" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="intermediary_id" Type="Int64" Nullable="false" />
+          <NavigationProperty Name="Intermediaries" Relationship="Self.FK_IntermediariesReports_Intermediaries" FromRole="IntermediariesReports" ToRole="Intermediaries" />
+        </EntityType>
+        <EntityType Name="Requests">
+          <Key>
+            <PropertyRef Name="request_id" />
+          </Key>
+          <Property Name="request_id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="description" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="customer_id" Type="Int64" Nullable="false" />
+          <NavigationProperty Name="Customers" Relationship="Self.FK_Requests_Customers" FromRole="Requests" ToRole="Customers" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="principal_id" Type="Int32" Nullable="false" />
+          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="version" Type="Int32" />
+          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+        </EntityType>
+        <EntityType Name="TaxReports">
+          <Key>
+            <PropertyRef Name="tax_report_id" />
+          </Key>
+          <Property Name="tax_report_id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="tax_report_number" Type="Int32" Nullable="false" />
+          <Property Name="agent_id" Type="Int64" Nullable="false" />
+          <NavigationProperty Name="Agents" Relationship="Self.FK_TaxReports_Agents" FromRole="TaxReports" ToRole="Agents" />
+        </EntityType>
+        <EntityType Name="Tickets">
+          <Key>
+            <PropertyRef Name="ticket_id" />
+          </Key>
+          <Property Name="ticket_id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="departure_from" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="arrival_to" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="nights_count" Type="Int32" Nullable="false" />
+          <Property Name="cost" Type="Decimal" Precision="19" Scale="4" Nullable="false" />
+          <Property Name="tour_id" Type="Int64" Nullable="false" />
+          <Property Name="customer_id" Type="Int64" Nullable="false" />
+          <Property Name="agent_id" Type="Int64" Nullable="false" />
+          <NavigationProperty Name="Tours" Relationship="Self.FK_Tickets_Tours" FromRole="Tickets" ToRole="Tours" />
+          <NavigationProperty Name="TicketsCustomers" Relationship="Self.FK_TicketsCustomers_Tickets" FromRole="Tickets" ToRole="TicketsCustomers" />
+        </EntityType>
+        <EntityType Name="Tours">
+          <Key>
+            <PropertyRef Name="tour_id" />
+          </Key>
+          <Property Name="tour_id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="hotel_id" Type="Int64" Nullable="false" />
+          <Property Name="departure_date_id" Type="Int64" Nullable="false" />
+          <Property Name="cost" Type="Decimal" Precision="19" Scale="4" Nullable="false" />
+          <NavigationProperty Name="Excursions" Relationship="Self.FK_Excursions_Tours" FromRole="Tours" ToRole="Excursions" />
+          <NavigationProperty Name="Hotels" Relationship="Self.FK_Tours_Hotels" FromRole="Tours" ToRole="Hotels" />
+          <NavigationProperty Name="Tickets" Relationship="Self.FK_Tickets_Tours" FromRole="Tours" ToRole="Tickets" />
+          <NavigationProperty Name="Directions" Relationship="Self.DirectionsTours" FromRole="Tours" ToRole="Directions" />
+          <NavigationProperty Name="DeparturesDates" Relationship="Self.ToursDepartures" FromRole="Tours" ToRole="DeparturesDates" />
+        </EntityType>
+        <EntityType Name="TicketsCustomers">
+          <Key>
+            <PropertyRef Name="ticket_id" />
+            <PropertyRef Name="customer_id" />
+            <PropertyRef Name="agent_id" />
+          </Key>
+          <Property Name="ticket_id" Type="Int64" Nullable="false" />
+          <Property Name="customer_id" Type="Int64" Nullable="false" />
+          <Property Name="agent_id" Type="Int64" Nullable="false" />
+          <NavigationProperty Name="Agents" Relationship="Self.FK_TicketsCustomers_Agents" FromRole="TicketsCustomers" ToRole="Agents" />
+          <NavigationProperty Name="Customers" Relationship="Self.FK_TicketsCustomers_Customers" FromRole="TicketsCustomers" ToRole="Customers" />
+          <NavigationProperty Name="Tickets" Relationship="Self.FK_TicketsCustomers_Tickets" FromRole="TicketsCustomers" ToRole="Tickets" />
+        </EntityType>
+        <Association Name="FK_Agents_Authorizations">
+          <End Role="Authorizations" Type="Self.Authorizations" Multiplicity="1" />
+          <End Role="Agents" Type="Self.Agents" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Authorizations">
+              <PropertyRef Name="authorization_id" />
+            </Principal>
+            <Dependent Role="Agents">
+              <PropertyRef Name="authorization_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Agents_Contacts">
+          <End Role="Contacts" Type="Self.Contacts" Multiplicity="1" />
+          <End Role="Agents" Type="Self.Agents" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Contacts">
+              <PropertyRef Name="contact_id" />
+            </Principal>
+            <Dependent Role="Agents">
+              <PropertyRef Name="contact_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Agents_Documents">
+          <End Role="Documents" Type="Self.Documents" Multiplicity="1" />
+          <End Role="Agents" Type="Self.Agents" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Documents">
+              <PropertyRef Name="document_id" />
+            </Principal>
+            <Dependent Role="Agents">
+              <PropertyRef Name="document_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Agents_Genders">
+          <End Role="Genders" Type="Self.Genders" Multiplicity="1" />
+          <End Role="Agents" Type="Self.Agents" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Genders">
+              <PropertyRef Name="gender_id" />
+            </Principal>
+            <Dependent Role="Agents">
+              <PropertyRef Name="gender_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TaxReports_Agents">
+          <End Role="Agents" Type="Self.Agents" Multiplicity="1" />
+          <End Role="TaxReports" Type="Self.TaxReports" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Agents">
+              <PropertyRef Name="agent_id" />
+            </Principal>
+            <Dependent Role="TaxReports">
+              <PropertyRef Name="agent_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TicketsCustomers_Agents">
+          <End Role="Agents" Type="Self.Agents" Multiplicity="1" />
+          <End Role="TicketsCustomers" Type="Self.TicketsCustomers" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Agents">
+              <PropertyRef Name="agent_id" />
+            </Principal>
+            <Dependent Role="TicketsCustomers">
+              <PropertyRef Name="agent_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Customers_Authorizations">
+          <End Role="Authorizations" Type="Self.Authorizations" Multiplicity="1" />
+          <End Role="Customers" Type="Self.Customers" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Authorizations">
+              <PropertyRef Name="authorization_id" />
+            </Principal>
+            <Dependent Role="Customers">
+              <PropertyRef Name="authorization_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Customers_Contacts">
+          <End Role="Contacts" Type="Self.Contacts" Multiplicity="1" />
+          <End Role="Customers" Type="Self.Customers" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Contacts">
+              <PropertyRef Name="contact_id" />
+            </Principal>
+            <Dependent Role="Customers">
+              <PropertyRef Name="contact_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Intermediaries_Contacts">
+          <End Role="Contacts" Type="Self.Contacts" Multiplicity="1" />
+          <End Role="Intermediaries" Type="Self.Intermediaries" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Contacts">
+              <PropertyRef Name="contact_id" />
+            </Principal>
+            <Dependent Role="Intermediaries">
+              <PropertyRef Name="contact_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Intermediaries_Contracts">
+          <End Role="Contracts" Type="Self.Contracts" Multiplicity="1" />
+          <End Role="Intermediaries" Type="Self.Intermediaries" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Contracts">
+              <PropertyRef Name="contract_id" />
+            </Principal>
+            <Dependent Role="Intermediaries">
+              <PropertyRef Name="contract_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Customers_Genders">
+          <End Role="Genders" Type="Self.Genders" Multiplicity="1" />
+          <End Role="Customers" Type="Self.Customers" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Genders">
+              <PropertyRef Name="gender_id" />
+            </Principal>
+            <Dependent Role="Customers">
+              <PropertyRef Name="gender_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Requests_Customers">
+          <End Role="Customers" Type="Self.Customers" Multiplicity="1" />
+          <End Role="Requests" Type="Self.Requests" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Customers">
+              <PropertyRef Name="customer_id" />
+            </Principal>
+            <Dependent Role="Requests">
+              <PropertyRef Name="customer_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TicketsCustomers_Customers">
+          <End Role="Customers" Type="Self.Customers" Multiplicity="1" />
+          <End Role="TicketsCustomers" Type="Self.TicketsCustomers" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Customers">
+              <PropertyRef Name="customer_id" />
+            </Principal>
+            <Dependent Role="TicketsCustomers">
+              <PropertyRef Name="customer_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Excursions_Tours">
+          <End Role="Tours" Type="Self.Tours" Multiplicity="1" />
+          <End Role="Excursions" Type="Self.Excursions" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tours">
+              <PropertyRef Name="tour_id" />
+            </Principal>
+            <Dependent Role="Excursions">
+              <PropertyRef Name="tour_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Tours_Hotels">
+          <End Role="Hotels" Type="Self.Hotels" Multiplicity="1" />
+          <End Role="Tours" Type="Self.Tours" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Hotels">
+              <PropertyRef Name="hotel_id" />
+            </Principal>
+            <Dependent Role="Tours">
+              <PropertyRef Name="hotel_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_IntermediariesReports_Intermediaries">
+          <End Role="Intermediaries" Type="Self.Intermediaries" Multiplicity="1" />
+          <End Role="IntermediariesReports" Type="Self.IntermediariesReports" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Intermediaries">
+              <PropertyRef Name="intermediary_id" />
+            </Principal>
+            <Dependent Role="IntermediariesReports">
+              <PropertyRef Name="intermediary_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Tickets_Tours">
+          <End Role="Tours" Type="Self.Tours" Multiplicity="1" />
+          <End Role="Tickets" Type="Self.Tickets" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tours">
+              <PropertyRef Name="tour_id" />
+            </Principal>
+            <Dependent Role="Tickets">
+              <PropertyRef Name="tour_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TicketsCustomers_Tickets">
+          <End Role="Tickets" Type="Self.Tickets" Multiplicity="1" />
+          <End Role="TicketsCustomers" Type="Self.TicketsCustomers" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tickets">
+              <PropertyRef Name="ticket_id" />
+            </Principal>
+            <Dependent Role="TicketsCustomers">
+              <PropertyRef Name="ticket_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="DirectionsTours">
+          <End Role="Directions" Type="Self.Directions" Multiplicity="*" />
+          <End Role="Tours" Type="Self.Tours" Multiplicity="*" />
+        </Association>
+        <Association Name="HotelsBeaches">
+          <End Role="Beaches" Type="Self.Beaches" Multiplicity="*" />
+          <End Role="Hotels" Type="Self.Hotels" Multiplicity="*" />
+        </Association>
+        <Association Name="HotelsCities">
+          <End Role="Cities" Type="Self.Cities" Multiplicity="*" />
+          <End Role="Hotels" Type="Self.Hotels" Multiplicity="*" />
+        </Association>
+        <Association Name="ToursDepartures">
+          <End Role="DeparturesDates" Type="Self.DeparturesDates" Multiplicity="*" />
+          <End Role="Tours" Type="Self.Tours" Multiplicity="*" />
+        </Association>
+        <EntityContainer Name="TravelAgentEntities2" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Agents" EntityType="Self.Agents" />
+          <EntitySet Name="Authorizations" EntityType="Self.Authorizations" />
+          <EntitySet Name="Beaches" EntityType="Self.Beaches" />
+          <EntitySet Name="Cities" EntityType="Self.Cities" />
+          <EntitySet Name="Contacts" EntityType="Self.Contacts" />
+          <EntitySet Name="Contracts" EntityType="Self.Contracts" />
+          <EntitySet Name="Customers" EntityType="Self.Customers" />
+          <EntitySet Name="DeparturesDates" EntityType="Self.DeparturesDates" />
+          <EntitySet Name="Directions" EntityType="Self.Directions" />
+          <EntitySet Name="Documents" EntityType="Self.Documents" />
+          <EntitySet Name="Excursions" EntityType="Self.Excursions" />
+          <EntitySet Name="Genders" EntityType="Self.Genders" />
+          <EntitySet Name="Hotels" EntityType="Self.Hotels" />
+          <EntitySet Name="Intermediaries" EntityType="Self.Intermediaries" />
+          <EntitySet Name="IntermediariesReports" EntityType="Self.IntermediariesReports" />
+          <EntitySet Name="Requests" EntityType="Self.Requests" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" />
+          <EntitySet Name="TaxReports" EntityType="Self.TaxReports" />
+          <EntitySet Name="Tickets" EntityType="Self.Tickets" />
+          <EntitySet Name="Tours" EntityType="Self.Tours" />
+          <EntitySet Name="TicketsCustomers" EntityType="Self.TicketsCustomers" />
+          <AssociationSet Name="FK_Agents_Authorizations" Association="Self.FK_Agents_Authorizations">
+            <End Role="Authorizations" EntitySet="Authorizations" />
+            <End Role="Agents" EntitySet="Agents" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Agents_Contacts" Association="Self.FK_Agents_Contacts">
+            <End Role="Contacts" EntitySet="Contacts" />
+            <End Role="Agents" EntitySet="Agents" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Agents_Documents" Association="Self.FK_Agents_Documents">
+            <End Role="Documents" EntitySet="Documents" />
+            <End Role="Agents" EntitySet="Agents" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Agents_Genders" Association="Self.FK_Agents_Genders">
+            <End Role="Genders" EntitySet="Genders" />
+            <End Role="Agents" EntitySet="Agents" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TaxReports_Agents" Association="Self.FK_TaxReports_Agents">
+            <End Role="Agents" EntitySet="Agents" />
+            <End Role="TaxReports" EntitySet="TaxReports" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TicketsCustomers_Agents" Association="Self.FK_TicketsCustomers_Agents">
+            <End Role="Agents" EntitySet="Agents" />
+            <End Role="TicketsCustomers" EntitySet="TicketsCustomers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Customers_Authorizations" Association="Self.FK_Customers_Authorizations">
+            <End Role="Authorizations" EntitySet="Authorizations" />
+            <End Role="Customers" EntitySet="Customers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Customers_Contacts" Association="Self.FK_Customers_Contacts">
+            <End Role="Contacts" EntitySet="Contacts" />
+            <End Role="Customers" EntitySet="Customers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Intermediaries_Contacts" Association="Self.FK_Intermediaries_Contacts">
+            <End Role="Contacts" EntitySet="Contacts" />
+            <End Role="Intermediaries" EntitySet="Intermediaries" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Intermediaries_Contracts" Association="Self.FK_Intermediaries_Contracts">
+            <End Role="Contracts" EntitySet="Contracts" />
+            <End Role="Intermediaries" EntitySet="Intermediaries" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Customers_Genders" Association="Self.FK_Customers_Genders">
+            <End Role="Genders" EntitySet="Genders" />
+            <End Role="Customers" EntitySet="Customers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Requests_Customers" Association="Self.FK_Requests_Customers">
+            <End Role="Customers" EntitySet="Customers" />
+            <End Role="Requests" EntitySet="Requests" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TicketsCustomers_Customers" Association="Self.FK_TicketsCustomers_Customers">
+            <End Role="Customers" EntitySet="Customers" />
+            <End Role="TicketsCustomers" EntitySet="TicketsCustomers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Excursions_Tours" Association="Self.FK_Excursions_Tours">
+            <End Role="Tours" EntitySet="Tours" />
+            <End Role="Excursions" EntitySet="Excursions" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Tours_Hotels" Association="Self.FK_Tours_Hotels">
+            <End Role="Hotels" EntitySet="Hotels" />
+            <End Role="Tours" EntitySet="Tours" />
+          </AssociationSet>
+          <AssociationSet Name="FK_IntermediariesReports_Intermediaries" Association="Self.FK_IntermediariesReports_Intermediaries">
+            <End Role="Intermediaries" EntitySet="Intermediaries" />
+            <End Role="IntermediariesReports" EntitySet="IntermediariesReports" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Tickets_Tours" Association="Self.FK_Tickets_Tours">
+            <End Role="Tours" EntitySet="Tours" />
+            <End Role="Tickets" EntitySet="Tickets" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TicketsCustomers_Tickets" Association="Self.FK_TicketsCustomers_Tickets">
+            <End Role="Tickets" EntitySet="Tickets" />
+            <End Role="TicketsCustomers" EntitySet="TicketsCustomers" />
+          </AssociationSet>
+          <AssociationSet Name="DirectionsTours" Association="Self.DirectionsTours">
+            <End Role="Directions" EntitySet="Directions" />
+            <End Role="Tours" EntitySet="Tours" />
+          </AssociationSet>
+          <AssociationSet Name="HotelsBeaches" Association="Self.HotelsBeaches">
+            <End Role="Beaches" EntitySet="Beaches" />
+            <End Role="Hotels" EntitySet="Hotels" />
+          </AssociationSet>
+          <AssociationSet Name="HotelsCities" Association="Self.HotelsCities">
+            <End Role="Cities" EntitySet="Cities" />
+            <End Role="Hotels" EntitySet="Hotels" />
+          </AssociationSet>
+          <AssociationSet Name="ToursDepartures" Association="Self.ToursDepartures">
+            <End Role="DeparturesDates" EntitySet="DeparturesDates" />
+            <End Role="Tours" EntitySet="Tours" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="Хранилище TravelAgentModelContainer" CdmEntityContainer="TravelAgentEntities2">
+          <EntitySetMapping Name="Agents">
+            <EntityTypeMapping TypeName="TravelAgentModel.Agents">
+              <MappingFragment StoreEntitySet="Agents">
+                <ScalarProperty Name="agent_id" ColumnName="agent_id" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="surname" ColumnName="surname" />
+                <ScalarProperty Name="patronymic" ColumnName="patronymic" />
+                <ScalarProperty Name="experience" ColumnName="experience" />
+                <ScalarProperty Name="birthday" ColumnName="birthday" />
+                <ScalarProperty Name="gender_id" ColumnName="gender_id" />
+                <ScalarProperty Name="contact_id" ColumnName="contact_id" />
+                <ScalarProperty Name="document_id" ColumnName="document_id" />
+                <ScalarProperty Name="authorization_id" ColumnName="authorization_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Authorizations">
+            <EntityTypeMapping TypeName="TravelAgentModel.Authorizations">
+              <MappingFragment StoreEntitySet="Authorizations">
+                <ScalarProperty Name="authorization_id" ColumnName="authorization_id" />
+                <ScalarProperty Name="user_login" ColumnName="user_login" />
+                <ScalarProperty Name="user_password" ColumnName="user_password" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Beaches">
+            <EntityTypeMapping TypeName="TravelAgentModel.Beaches">
+              <MappingFragment StoreEntitySet="Beaches">
+                <ScalarProperty Name="beach_id" ColumnName="beach_id" />
+                <ScalarProperty Name="beach_name" ColumnName="beach_name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Cities">
+            <EntityTypeMapping TypeName="TravelAgentModel.Cities">
+              <MappingFragment StoreEntitySet="Cities">
+                <ScalarProperty Name="city_id" ColumnName="city_id" />
+                <ScalarProperty Name="city_name" ColumnName="city_name" />
+                <ScalarProperty Name="country_name" ColumnName="country_name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Contacts">
+            <EntityTypeMapping TypeName="TravelAgentModel.Contacts">
+              <MappingFragment StoreEntitySet="Contacts">
+                <ScalarProperty Name="contact_id" ColumnName="contact_id" />
+                <ScalarProperty Name="phone_number" ColumnName="phone_number" />
+                <ScalarProperty Name="extra_phone_number" ColumnName="extra_phone_number" />
+                <ScalarProperty Name="email_address" ColumnName="email_address" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Contracts">
+            <EntityTypeMapping TypeName="TravelAgentModel.Contracts">
+              <MappingFragment StoreEntitySet="Contracts">
+                <ScalarProperty Name="contract_id" ColumnName="contract_id" />
+                <ScalarProperty Name="contract_number" ColumnName="contract_number" />
+                <ScalarProperty Name="contract_name" ColumnName="contract_name" />
+                <ScalarProperty Name="contract_date" ColumnName="contract_date" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Customers">
+            <EntityTypeMapping TypeName="TravelAgentModel.Customers">
+              <MappingFragment StoreEntitySet="Customers">
+                <ScalarProperty Name="customer_id" ColumnName="customer_id" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="surname" ColumnName="surname" />
+                <ScalarProperty Name="patronymic" ColumnName="patronymic" />
+                <ScalarProperty Name="birthday" ColumnName="birthday" />
+                <ScalarProperty Name="gender_id" ColumnName="gender_id" />
+                <ScalarProperty Name="contact_id" ColumnName="contact_id" />
+                <ScalarProperty Name="authorization_id" ColumnName="authorization_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DeparturesDates">
+            <EntityTypeMapping TypeName="TravelAgentModel.DeparturesDates">
+              <MappingFragment StoreEntitySet="DeparturesDates">
+                <ScalarProperty Name="departure_date_id" ColumnName="departure_date_id" />
+                <ScalarProperty Name="departure_start_date" ColumnName="departure_start_date" />
+                <ScalarProperty Name="departure_end_date" ColumnName="departure_end_date" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Directions">
+            <EntityTypeMapping TypeName="TravelAgentModel.Directions">
+              <MappingFragment StoreEntitySet="Directions">
+                <ScalarProperty Name="direction_id" ColumnName="direction_id" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="desctiption" ColumnName="desctiption" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Documents">
+            <EntityTypeMapping TypeName="TravelAgentModel.Documents">
+              <MappingFragment StoreEntitySet="Documents">
+                <ScalarProperty Name="document_id" ColumnName="document_id" />
+                <ScalarProperty Name="passport_series" ColumnName="passport_series" />
+                <ScalarProperty Name="passport_number" ColumnName="passport_number" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Excursions">
+            <EntityTypeMapping TypeName="TravelAgentModel.Excursions">
+              <MappingFragment StoreEntitySet="Excursions">
+                <ScalarProperty Name="excursion_id" ColumnName="excursion_id" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="description" ColumnName="description" />
+                <ScalarProperty Name="cost" ColumnName="cost" />
+                <ScalarProperty Name="tour_id" ColumnName="tour_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Genders">
+            <EntityTypeMapping TypeName="TravelAgentModel.Genders">
+              <MappingFragment StoreEntitySet="Genders">
+                <ScalarProperty Name="gender_id" ColumnName="gender_id" />
+                <ScalarProperty Name="name" ColumnName="name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Hotels">
+            <EntityTypeMapping TypeName="TravelAgentModel.Hotels">
+              <MappingFragment StoreEntitySet="Hotels">
+                <ScalarProperty Name="hotel_id" ColumnName="hotel_id" />
+                <ScalarProperty Name="hotel_name" ColumnName="hotel_name" />
+                <ScalarProperty Name="description" ColumnName="description" />
+                <ScalarProperty Name="hotel_class" ColumnName="hotel_class" />
+                <ScalarProperty Name="city_id" ColumnName="city_id" />
+                <ScalarProperty Name="beach_id" ColumnName="beach_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Intermediaries">
+            <EntityTypeMapping TypeName="TravelAgentModel.Intermediaries">
+              <MappingFragment StoreEntitySet="Intermediaries">
+                <ScalarProperty Name="intermediary_id" ColumnName="intermediary_id" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="contact_id" ColumnName="contact_id" />
+                <ScalarProperty Name="contract_id" ColumnName="contract_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="IntermediariesReports">
+            <EntityTypeMapping TypeName="TravelAgentModel.IntermediariesReports">
+              <MappingFragment StoreEntitySet="IntermediariesReports">
+                <ScalarProperty Name="report_id" ColumnName="report_id" />
+                <ScalarProperty Name="report_number" ColumnName="report_number" />
+                <ScalarProperty Name="report_name" ColumnName="report_name" />
+                <ScalarProperty Name="report_date" ColumnName="report_date" />
+                <ScalarProperty Name="intermediary_id" ColumnName="intermediary_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Requests">
+            <EntityTypeMapping TypeName="TravelAgentModel.Requests">
+              <MappingFragment StoreEntitySet="Requests">
+                <ScalarProperty Name="request_id" ColumnName="request_id" />
+                <ScalarProperty Name="description" ColumnName="description" />
+                <ScalarProperty Name="customer_id" ColumnName="customer_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="sysdiagrams">
+            <EntityTypeMapping TypeName="TravelAgentModel.sysdiagrams">
+              <MappingFragment StoreEntitySet="sysdiagrams">
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="definition" ColumnName="definition" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TaxReports">
+            <EntityTypeMapping TypeName="TravelAgentModel.TaxReports">
+              <MappingFragment StoreEntitySet="TaxReports">
+                <ScalarProperty Name="tax_report_id" ColumnName="tax_report_id" />
+                <ScalarProperty Name="tax_report_number" ColumnName="tax_report_number" />
+                <ScalarProperty Name="agent_id" ColumnName="agent_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Tickets">
+            <EntityTypeMapping TypeName="TravelAgentModel.Tickets">
+              <MappingFragment StoreEntitySet="Tickets">
+                <ScalarProperty Name="ticket_id" ColumnName="ticket_id" />
+                <ScalarProperty Name="departure_from" ColumnName="departure_from" />
+                <ScalarProperty Name="arrival_to" ColumnName="arrival_to" />
+                <ScalarProperty Name="nights_count" ColumnName="nights_count" />
+                <ScalarProperty Name="cost" ColumnName="cost" />
+                <ScalarProperty Name="tour_id" ColumnName="tour_id" />
+                <ScalarProperty Name="customer_id" ColumnName="customer_id" />
+                <ScalarProperty Name="agent_id" ColumnName="agent_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Tours">
+            <EntityTypeMapping TypeName="TravelAgentModel.Tours">
+              <MappingFragment StoreEntitySet="Tours">
+                <ScalarProperty Name="tour_id" ColumnName="tour_id" />
+                <ScalarProperty Name="hotel_id" ColumnName="hotel_id" />
+                <ScalarProperty Name="departure_date_id" ColumnName="departure_date_id" />
+                <ScalarProperty Name="cost" ColumnName="cost" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TicketsCustomers">
+            <EntityTypeMapping TypeName="TravelAgentModel.TicketsCustomers">
+              <MappingFragment StoreEntitySet="TicketsCustomers">
+                <ScalarProperty Name="ticket_id" ColumnName="ticket_id" />
+                <ScalarProperty Name="customer_id" ColumnName="customer_id" />
+                <ScalarProperty Name="agent_id" ColumnName="agent_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <AssociationSetMapping Name="DirectionsTours" TypeName="TravelAgentModel.DirectionsTours" StoreEntitySet="DirectionsTours">
+            <EndProperty Name="Directions">
+              <ScalarProperty Name="direction_id" ColumnName="direction_id" />
+            </EndProperty>
+            <EndProperty Name="Tours">
+              <ScalarProperty Name="tour_id" ColumnName="tour_id" />
+            </EndProperty>
+          </AssociationSetMapping>
+          <AssociationSetMapping Name="HotelsBeaches" TypeName="TravelAgentModel.HotelsBeaches" StoreEntitySet="HotelsBeaches">
+            <EndProperty Name="Beaches">
+              <ScalarProperty Name="beach_id" ColumnName="beach_id" />
+            </EndProperty>
+            <EndProperty Name="Hotels">
+              <ScalarProperty Name="hotel_id" ColumnName="hotel_id" />
+            </EndProperty>
+          </AssociationSetMapping>
+          <AssociationSetMapping Name="HotelsCities" TypeName="TravelAgentModel.HotelsCities" StoreEntitySet="HotelsCities">
+            <EndProperty Name="Cities">
+              <ScalarProperty Name="city_id" ColumnName="city_id" />
+            </EndProperty>
+            <EndProperty Name="Hotels">
+              <ScalarProperty Name="hotel_id" ColumnName="hotel_id" />
+            </EndProperty>
+          </AssociationSetMapping>
+          <AssociationSetMapping Name="ToursDepartures" TypeName="TravelAgentModel.ToursDepartures" StoreEntitySet="ToursDepartures">
+            <EndProperty Name="DeparturesDates">
+              <ScalarProperty Name="departure_date_id" ColumnName="departure_date_id" />
+            </EndProperty>
+            <EndProperty Name="Tours">
+              <ScalarProperty Name="tour_id" ColumnName="tour_id" />
+            </EndProperty>
+          </AssociationSetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Нет" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
