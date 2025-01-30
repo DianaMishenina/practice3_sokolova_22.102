@@ -11,7 +11,8 @@ namespace practice3_sokolova_22._102
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel.DataAnnotations;
+
     public partial class Authorizations
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -22,7 +23,13 @@ namespace practice3_sokolova_22._102
         }
     
         public long authorization_id { get; set; }
+
+        [Required]
+        [StringLength(16, MinimumLength = 8)]
         public string user_login { get; set; }
+
+        [Required]
+        [StringLength(256, MinimumLength = 8)]
         public string user_password { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

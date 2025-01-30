@@ -11,7 +11,8 @@ namespace practice3_sokolova_22._102
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel.DataAnnotations;
+
     public partial class Agents
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -20,16 +21,41 @@ namespace practice3_sokolova_22._102
             this.TaxReports = new HashSet<TaxReports>();
             this.TicketsCustomers = new HashSet<TicketsCustomers>();
         }
-    
+
         public long agent_id { get; set; }
+
+
+        [Required]
+        [StringLength(50, MinimumLength = 3)]
         public string name { get; set; }
+
+
+        [Required]
+        [StringLength(50, MinimumLength = 3)]
         public string surname { get; set; }
+
+
+        [StringLength(50, MinimumLength = 0)]
         public string patronymic { get; set; }
+
+        [Required]
+        [Range(1, 100)]
         public int experience { get; set; }
+
+
+        [Required]
         public System.DateTime birthday { get; set; }
+
+
         public long gender_id { get; set; }
+
+
         public long contact_id { get; set; }
+
+
         public long document_id { get; set; }
+
+
         public long authorization_id { get; set; }
     
         public virtual Authorizations Authorizations { get; set; }

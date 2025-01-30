@@ -11,7 +11,8 @@ namespace practice3_sokolova_22._102
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel.DataAnnotations;
+
     public partial class Contacts
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -23,8 +24,16 @@ namespace practice3_sokolova_22._102
         }
     
         public long contact_id { get; set; }
+
+        [Required]
+        [StringLength(16, MinimumLength = 11)]
         public string phone_number { get; set; }
+
+        [StringLength(16, MinimumLength = 0)]
         public string extra_phone_number { get; set; }
+
+        [Required]
+        [RegularExpression(@"^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$")]
         public string email_address { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

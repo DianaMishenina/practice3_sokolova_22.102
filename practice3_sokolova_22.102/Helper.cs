@@ -1,9 +1,13 @@
-﻿using System;
+﻿using practice3_sokolova_22._102.Pages;
+using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Data.Entity.Migrations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
+using System.Xml.Linq;
 
 namespace practice3_sokolova_22._102
 {
@@ -87,24 +91,42 @@ namespace practice3_sokolova_22._102
         {
             _context1.Contacts.Add(contact);
             _context1.SaveChanges();
+            MessageBox.Show("Контакты успешно добавлены");
         }
 
         public void AddAuthorization(Authorizations authorization)
         {
             _context1.Authorizations.Add(authorization);
             _context1.SaveChanges();
+            MessageBox.Show("Авторизация успешно добавлена");
         }
 
         public void AddDocument(Documents document)
         {
             _context1.Documents.Add(document);
             _context1.SaveChanges();
+            MessageBox.Show("Паспорт успешно добавлен");
         }
 
         public void AddAgent(Agents agent) 
         {
-            _context1.Agents.Add(agent);
-            _context1.SaveChanges();
+            var context = new ValidationContext(agent);
+            var results = new List<ValidationResult>();
+
+            if (!Validator.TryValidateObject(agent, context, results, true))
+            {
+                MessageBox.Show("Не удалось добавить турагента");
+                foreach (var error in results)
+                {
+                    MessageBox.Show(error.ErrorMessage);
+                }             
+            }
+            else
+            {
+                _context1.Agents.Add(agent);
+                _context1.SaveChanges();
+                MessageBox.Show($"Турагент {agent.name} успешно добавлен");
+            }           
         }
     }
 }

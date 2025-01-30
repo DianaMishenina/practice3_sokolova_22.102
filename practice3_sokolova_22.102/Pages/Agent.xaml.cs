@@ -18,19 +18,21 @@ namespace practice3_sokolova_22._102.Pages
     public partial class Agent : Page
     {
         Agents agent;
+        string _password;
 
-        public Agent(Authorizations authorization)
+        public Agent(Authorizations authorization, string password)
         {
             InitializeComponent();
 
             agent = Helper.GetContext().Agents.FirstOrDefault(x=>x.authorization_id == authorization.authorization_id);
             DataContext = agent;
+            _password = password;
 
         }
 
         private void btnChangeAgent_Click(object sender, RoutedEventArgs e)
         {
-            NavigationService.Navigate(new ChangeAgent(agent));
+            NavigationService.Navigate(new ChangeAgent(agent, _password));
         }
     }
 }

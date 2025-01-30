@@ -1,4 +1,5 @@
-﻿using System;
+﻿using practice3_sokolova_22._102.Services;
+using System;
 using System.Collections.Generic;
 using System.Data.Entity.Migrations;
 using System.Linq;
@@ -20,12 +21,14 @@ namespace practice3_sokolova_22._102.Pages
 {
     public partial class ChangeAgent : Page
     {
-        public ChangeAgent(Agents agent)
+        public ChangeAgent(Agents agent, string password)
         {
             InitializeComponent();
 
+            tbPassword.Text = password;
+
             agent = Helper.GetContext().Agents.FirstOrDefault(x => x.authorization_id == agent.authorization_id);
-            DataContext = agent;
+            DataContext = agent;          
         }
         
         private void btnClear_Click(object sender, RoutedEventArgs e)
@@ -65,7 +68,7 @@ namespace practice3_sokolova_22._102.Pages
                     Authorizations authorization = new Authorizations
                     {
                         user_login = tbLogin.Text.Trim(),
-                        user_password = tbPassword.Text.Trim(),
+                        user_password = Hash.HashPassword(tbPassword.Text.Trim())
                     };
                     helper.UpdateAuthorization(authorization);
 
@@ -96,7 +99,6 @@ namespace practice3_sokolova_22._102.Pages
         private void btnAddAgent_Click(object sender, RoutedEventArgs e)
         {
             NavigationService.Navigate(new AddAgent());
-
         }
     }
 }

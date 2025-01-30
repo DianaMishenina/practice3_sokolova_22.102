@@ -26,6 +26,8 @@ namespace practice3_sokolova_22._102.Pages
         private int remainingTime;
         int click;
         DateTime dt = DateTime.Now;
+        private string code = string.Empty;
+        private Customers findUser;
 
 
         public Autho()
@@ -73,15 +75,17 @@ namespace practice3_sokolova_22._102.Pages
             tblCaptcha.TextDecorations = TextDecorations.Strikethrough;
         }
 
-
         private void btnEnter_Click(object sender, RoutedEventArgs e)
         {
             click += 1;
             string login = tbLogin.Text.Trim();
-            string password = tbPassword.Password.Trim();
-
+            string password = Hash.HashPassword(tbPassword.Password.Trim());
+            string email = string.Empty;
+            Agents agent;
+            Contacts agentEmail;
             var db = Helper.GetContext();
             int h = dt.Hour;
+            GenerateCode generateCode = new GenerateCode();
 
 
             if (h < 8 || h > 24)
@@ -92,12 +96,14 @@ namespace practice3_sokolova_22._102.Pages
             {
                 UnblockElements();
                 var authorization = db.Authorizations.Where(x => x.user_login == login && x.user_password == password).FirstOrDefault();
-                var findUser = db.Customers.Find(authorization.authorization_id);
+                
 
                 if (click == 1)
                 {
                     if (authorization != null)
-                    {                     
+                    {
+                        findUser = db.Customers.Find(authorization.authorization_id);
+
                         if (findUser != null)
                         {
                             NavigationService.Navigate(new Client(authorization).tblGreet.Text = ShowGreeting(authorization));
@@ -105,8 +111,25 @@ namespace practice3_sokolova_22._102.Pages
                         }
                         else
                         {
-                            NavigationService.Navigate(new Agent(authorization));
-                            MessageBox.Show("Вы вошли в систему");
+                            VisibilityOn();
+                            code = generateCode.CodeGenerate();
+                            agent = db.Agents.FirstOrDefault(x => x.authorization_id == authorization.authorization_id);
+
+                            if (agent != null)
+                            {
+                                agentEmail = db.Contacts.FirstOrDefault(x => x.contact_id == agent.contact_id);
+
+                                if (agentEmail != null)
+                                {
+                                    email = agentEmail.email_address;
+                                }
+                            }
+                            else
+                            {
+                                MessageBox.Show("Турагент не найден");
+                            }
+
+                            SendEmail.SendEmailCode(email, code);
                         }                      
                     }
                     else
@@ -115,8 +138,29 @@ namespace practice3_sokolova_22._102.Pages
                         GenerateCapctcha();
                     }
                 }
-                else if (click > 1 && click < 3)
+                if (click == 2)
                 {
+                    if (btnOffOnAutentification.Content.ToString() == "Включить двухфакторную аутентификацию")
+                    {
+                        NavigationService.Navigate(new Agent(authorization, tbPassword.Password));
+                        MessageBox.Show("Вы вошли в систему");
+                    }
+                    else
+                    {
+                        if (tbCode.Text != code)
+                        {
+                            MessageBox.Show("Неверный код");
+                        }
+                        else 
+                        { 
+                            NavigationService.Navigate(new Agent(authorization, tbPassword.Password));
+                            MessageBox.Show("Вы вошли в систему");
+                        }
+                    }                   
+                }
+                else if (click == 3)
+                {
+                    GenerateCapctcha();
                     if (authorization != null && tbCaptcha.Text == tblCaptcha.Text)
                     {
                         if (findUser != null)
@@ -126,8 +170,35 @@ namespace practice3_sokolova_22._102.Pages
                         }
                         else
                         {
-                            NavigationService.Navigate(new Agent(authorization));
-                            MessageBox.Show("Вы вошли в систему");
+                            if (btnOffOnAutentification.Content.ToString() == "Включить двухфакторную аутентификацию")
+                            {
+                                NavigationService.Navigate(new Agent(authorization, tbPassword.Password));
+                                MessageBox.Show("Вы вошли в систему");
+                            }
+                            else
+                            {
+                                VisibilityOn();
+                                code = generateCode.CodeGenerate();
+                                SendEmail.SendEmailCode(email, code);
+
+                                if (btnOffOnAutentification.Content.ToString() == "Включить двухфакторную аутентификацию")
+                                {
+                                    NavigationService.Navigate(new Agent(authorization, tbPassword.Password));
+                                    MessageBox.Show("Вы вошли в систему");
+                                }
+                                else
+                                {
+                                    if (tbCode.Text != string.Empty && tbCode.Text != code)
+                                    {
+                                        MessageBox.Show("Неверный код");
+                                    }
+                                    if (tbCode.Text == code)
+                                    {
+                                        NavigationService.Navigate(new Agent(authorization, tbPassword.Password));
+                                        MessageBox.Show("Вы вошли в систему");
+                                    }
+                                }
+                            }
                         }
                     }
                     else
@@ -136,7 +207,7 @@ namespace practice3_sokolova_22._102.Pages
                         GenerateCapctcha();
                     }
                 }
-                else if (click == 3)
+                else if (click == 4)
                 {
                     BlockElements();
                     timer.Start();
@@ -207,6 +278,37 @@ namespace practice3_sokolova_22._102.Pages
         {
             BlockElements();
             return MessageBox.Show("В данное время доступ закрыт").ToString();
+        }
+
+        private void btnForgotPassword_Click(object sender, RoutedEventArgs e)
+        {
+            NavigationService.Navigate(new ForgotPassword());
+        }
+
+        private void VisibilityOn()
+        {
+            tblCode.Visibility = Visibility.Visible;
+            tbCode.Visibility = Visibility.Visible;
+        }
+
+        private void VisibilityOff()
+        {
+            tblCode.Visibility = Visibility.Hidden;
+            tbCode.Visibility = Visibility.Hidden;
+        }
+
+        private void btnOffOnAutentification_Click(object sender, RoutedEventArgs e)
+        {
+            if (btnOffOnAutentification.Content.ToString() == "Отключить двухфакторную аутентификацию")
+            {
+                VisibilityOff();
+                btnOffOnAutentification.Content = "Включить двухфакторную аутентификацию";
+            }
+            else
+            {
+                VisibilityOn();
+                btnOffOnAutentification.Content = "Отключить двухфакторную аутентификацию";
+            }
         }
     }
 }
