@@ -8,8 +8,16 @@ using System.Threading.Tasks;
 
 namespace practice3_sokolova_22._102.Services
 {
+    /// <summary>
+    /// Класс для отправки кода на почту сотрудника
+    /// </summary>
     internal class SendEmail
     {
+        /// <summary>
+        /// Асинхронная функция для отравки письма с кодом для восстановления пароля на почту сотрудника
+        /// </summary>
+        /// <param name="email">Электронная почта сотрудника для отправки письма</param>
+        /// <param name="code">Сгенерированный код, котрый будет указан в теле письма</param>
         public static async Task SendEmailAsync(string email, string code)
         {
             MailAddress from = new MailAddress("sokolovad46@yandex.ru", "Program");
@@ -26,6 +34,11 @@ namespace practice3_sokolova_22._102.Services
             await smtp.SendMailAsync(message);
         }
 
+        /// <summary>
+        /// Метод для отравки письма с кодом для двухфакторной аутентификации на почту сотрудника
+        /// </summary>
+        /// <param name="email">Электронная почта сотрудника для отправки письма</param>
+        /// <param name="code">Сгенерированный код, котрый будет указан в теле письма</param>
         public static void SendEmailCode(string email, string code)
         {
             MailAddress from = new MailAddress("sokolovad46@yandex.ru", "Program");

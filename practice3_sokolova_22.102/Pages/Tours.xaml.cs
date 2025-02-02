@@ -20,6 +20,9 @@ namespace practice3_sokolova_22._102.Pages
     /// </summary>
     public partial class Tours : Page
     {
+        /// <summary>
+        /// Конструктор класса для инициализации элементов и получения списка туров из таблицы Tours
+        /// </summary>
         public Tours()
         {
             InitializeComponent();

@@ -11,6 +11,11 @@ namespace practice3_sokolova_22._102.Services
         private static readonly Random random = new Random();
         private const string Characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
 
+        /// <summary>
+        /// Функция генерирующая капчу
+        /// </summary>
+        /// <param name="length">Длина капчи</param>
+        /// <returns>Возвращает капчу определенной длины</returns>
         public static string GenerateCaptchaText(int length)
         {
             if (length <= 0)

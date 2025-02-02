@@ -15,11 +15,19 @@ using System.Windows.Shapes;
 
 namespace practice3_sokolova_22._102.Pages
 {
+    /// <summary>
+    /// Класс определения сотрудника, вошедшего в систему
+    /// </summary>
     public partial class Agent : Page
     {
         Agents agent;
         string _password;
 
+        /// <summary>
+        /// Конструктор класса для инициализации элементов и нахождения сотрудника по его авторизации
+        /// </summary>
+        /// <param name="authorization">Авторизация сотрудника</param>
+        /// <param name="password">Пароль введенный на этапе авторизации</param>
         public Agent(Authorizations authorization, string password)
         {
             InitializeComponent();
@@ -30,6 +38,9 @@ namespace practice3_sokolova_22._102.Pages
 
         }
 
+        /// <summary>
+        /// Процедура перехода на страницу изменения данных сотрудника при нажатии на кнопку
+        /// </summary>
         private void btnChangeAgent_Click(object sender, RoutedEventArgs e)
         {
             NavigationService.Navigate(new ChangeAgent(agent, _password));

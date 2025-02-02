@@ -20,6 +20,9 @@ using System.Windows.Threading;
 
 namespace practice3_sokolova_22._102.Pages
 {
+    /// <summary>
+    /// Класс для авторизации
+    /// </summary>
     public partial class Autho : Page
     {
         private DispatcherTimer timer;
@@ -30,6 +33,9 @@ namespace practice3_sokolova_22._102.Pages
         private Customers findUser;
 
 
+        /// <summary>
+        /// Конструктор класса
+        /// </summary>
         public Autho()
         {
             InitializeComponent();
@@ -39,6 +45,9 @@ namespace practice3_sokolova_22._102.Pages
             click = 0;
         }
 
+        /// <summary>
+        /// Процедура включения (выключения) таймера
+        /// </summary>
         private void Timer_Tick(object sender, EventArgs e)
         {
             if (remainingTime >= 0)
@@ -60,11 +69,17 @@ namespace practice3_sokolova_22._102.Pages
             }
         }
 
+        /// <summary>
+        /// Процедура перехода на страницу туров при нажатии на кнопку "Войти как гость"
+        /// </summary>
         private void btnEnterGuests_Click(object sender, RoutedEventArgs e)
         {
             NavigationService.Navigate(new Tours());
         }
 
+        /// <summary>
+        /// Процедура вызывающая функцию генерации капчи длины 6
+        /// </summary>
         private void GenerateCapctcha()
         {
             tbCaptcha.Visibility = Visibility.Visible;
@@ -75,6 +90,9 @@ namespace practice3_sokolova_22._102.Pages
             tblCaptcha.TextDecorations = TextDecorations.Strikethrough;
         }
 
+        /// <summary>
+        /// Процедура входа в систему при нажатии на кнопку "Войти"
+        /// </summary>
         private void btnEnter_Click(object sender, RoutedEventArgs e)
         {
             click += 1;
@@ -216,6 +234,9 @@ namespace practice3_sokolova_22._102.Pages
             }
         }
 
+        /// <summary>
+        /// Процедура блокировки элементов
+        /// </summary>
         private void BlockElements()
         {
             btnEnter.IsEnabled = false;
@@ -225,6 +246,9 @@ namespace practice3_sokolova_22._102.Pages
             tbCaptcha.IsEnabled = false;
         }
 
+        /// <summary>
+        /// Процедура разблокировки элементов
+        /// </summary>
         private void UnblockElements()
         {
             btnEnter.IsEnabled = true;
@@ -234,8 +258,13 @@ namespace practice3_sokolova_22._102.Pages
             tbCaptcha.IsEnabled = true;
         }
 
+        /// <summary>
+        /// Функция, выводящая вторую часть приветствия при входе в систему
+        /// </summary>
         private string ShowGreeting(Authorizations autho)
         {
+            /// <param name="autho">Запись об авторизации пользователя</param>
+            /// <returns>Возвращает вторую часть приветствия, если клиент найден</returns>
             var db = Helper.GetContext();
 
             var customer = db.Customers.Where(c => c.authorization_id == autho.authorization_id).FirstOrDefault();
@@ -255,8 +284,14 @@ namespace practice3_sokolova_22._102.Pages
             }
         }
 
+        /// <summary>
+        /// Функция, выводящая первую часть приветствия при входе в систему в зависимости от времени суток 
+        /// </summary>
         private string GreetingMessage(DateTime dt)
         {
+            /// <param name="dt">Параметр представляющий текущее время</param>
+            /// <returns>Возвращает первую часть приветствия в зависимости от часа</returns>
+            
             int h = dt.Hour;
             
             if (h >= 10 && h < 12)
@@ -274,29 +309,44 @@ namespace practice3_sokolova_22._102.Pages
             return "";
         }
 
+        /// <summary>
+        /// Функция, блокирующая доступ к системе 
+        /// </summary>
         private string Access()
         {
             BlockElements();
             return MessageBox.Show("В данное время доступ закрыт").ToString();
         }
 
+        /// <summary>
+        /// Процедура перехода на страницу ввода электронной почты (логина) при нажатии на кнопку "Забыли пароль?"
+        /// </summary>
         private void btnForgotPassword_Click(object sender, RoutedEventArgs e)
         {
             NavigationService.Navigate(new ForgotPassword());
         }
 
+        /// <summary>
+        /// Процедура, включающая видимость элемента для ввода кода
+        /// </summary>
         private void VisibilityOn()
         {
             tblCode.Visibility = Visibility.Visible;
             tbCode.Visibility = Visibility.Visible;
         }
 
+        /// <summary>
+        /// Процедура, выключающая видимость элемента для ввода кода
+        /// </summary>
         private void VisibilityOff()
         {
             tblCode.Visibility = Visibility.Hidden;
             tbCode.Visibility = Visibility.Hidden;
         }
 
+        /// <summary>
+        /// Процедура, меняющая назначение кнопки "Отключить двухфакторную аутентификацию"
+        /// </summary>
         private void btnOffOnAutentification_Click(object sender, RoutedEventArgs e)
         {
             if (btnOffOnAutentification.Content.ToString() == "Отключить двухфакторную аутентификацию")
