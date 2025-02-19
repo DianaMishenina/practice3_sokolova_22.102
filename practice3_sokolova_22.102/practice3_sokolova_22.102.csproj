@@ -60,6 +60,15 @@
     <Reference Include="WindowsBase" />
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
+    <Reference Include="Xceed.Document.NET, Version=4.0.0.0, Culture=neutral, PublicKeyToken=3e4669d2f30244f4, processorArchitecture=MSIL">
+      <HintPath>..\packages\DocX.4.0.25103.5784\lib\net40\Xceed.Document.NET.dll</HintPath>
+    </Reference>
+    <Reference Include="Xceed.Drawing.NET, Version=1.0.0.0, Culture=neutral, PublicKeyToken=3e4669d2f30244f4, processorArchitecture=MSIL">
+      <HintPath>..\packages\DocX.4.0.25103.5784\lib\net40\Xceed.Drawing.NET.dll</HintPath>
+    </Reference>
+    <Reference Include="Xceed.Words.NET, Version=4.0.0.0, Culture=neutral, PublicKeyToken=3e4669d2f30244f4, processorArchitecture=MSIL">
+      <HintPath>..\packages\DocX.4.0.25103.5784\lib\net40\Xceed.Words.NET.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <ApplicationDefinition Include="App.xaml">
@@ -139,11 +148,17 @@
     <Compile Include="Pages\CreateNewPassword.xaml.cs">
       <DependentUpon>CreateNewPassword.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Pages\EmploymentContractWindow.xaml.cs">
+      <DependentUpon>EmploymentContractWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Pages\EnterCode.xaml.cs">
       <DependentUpon>EnterCode.xaml</DependentUpon>
     </Compile>
     <Compile Include="Pages\ForgotPassword.xaml.cs">
       <DependentUpon>ForgotPassword.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\PersonalFile.xaml.cs">
+      <DependentUpon>PersonalFile.xaml</DependentUpon>
     </Compile>
     <Compile Include="Pages\Tours.xaml.cs">
       <DependentUpon>Tours.xaml</DependentUpon>
@@ -206,11 +221,19 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Pages\EmploymentContractWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Pages\EnterCode.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Pages\ForgotPassword.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\PersonalFile.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -255,6 +278,7 @@
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
+    <None Include="Resources\blank-trudovogo-dogovora.docx" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

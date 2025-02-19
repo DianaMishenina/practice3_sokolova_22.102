@@ -120,7 +120,6 @@ namespace practice3_sokolova_22._102
         {
             _context1.Contacts.Add(contact);
             _context1.SaveChanges();
-            MessageBox.Show("Контакты успешно добавлены");
         }
 
         /// <summary>
@@ -131,7 +130,6 @@ namespace practice3_sokolova_22._102
         {
             _context1.Authorizations.Add(authorization);
             _context1.SaveChanges();
-            MessageBox.Show("Авторизация успешно добавлена");
         }
 
         /// <summary>
@@ -142,7 +140,6 @@ namespace practice3_sokolova_22._102
         {
             _context1.Documents.Add(document);
             _context1.SaveChanges();
-            MessageBox.Show("Паспорт успешно добавлен");
         }
 
         /// <summary>

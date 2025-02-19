@@ -129,25 +129,33 @@ namespace practice3_sokolova_22._102.Pages
                         }
                         else
                         {
-                            VisibilityOn();
-                            code = generateCode.CodeGenerate();
-                            agent = db.Agents.FirstOrDefault(x => x.authorization_id == authorization.authorization_id);
-
-                            if (agent != null)
+                            if (btnOffOnAutentification.Content.ToString() == "Включить двухфакторную аутентификацию")
                             {
-                                agentEmail = db.Contacts.FirstOrDefault(x => x.contact_id == agent.contact_id);
-
-                                if (agentEmail != null)
-                                {
-                                    email = agentEmail.email_address;
-                                }
-                            }
+                                NavigationService.Navigate(new Agent(authorization, tbPassword.Password));
+                                MessageBox.Show("Вы вошли в систему");
+                            } 
                             else
                             {
-                                MessageBox.Show("Турагент не найден");
-                            }
+                                VisibilityOn();
+                                code = generateCode.CodeGenerate();
+                                agent = db.Agents.FirstOrDefault(x => x.authorization_id == authorization.authorization_id);
 
-                            SendEmail.SendEmailCode(email, code);
+                                if (agent != null)
+                                {
+                                    agentEmail = db.Contacts.FirstOrDefault(x => x.contact_id == agent.contact_id);
+
+                                    if (agentEmail != null)
+                                    {
+                                        email = agentEmail.email_address;
+                                    }
+                                }
+                                else
+                                {
+                                    MessageBox.Show("Турагент не найден");
+                                }
+
+                                SendEmail.SendEmailCode(email, code);
+                            }                          
                         }                      
                     }
                     else

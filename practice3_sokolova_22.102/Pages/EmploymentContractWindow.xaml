@@ -1,0 +1,66 @@
+﻿<Window x:Class="practice3_sokolova_22._102.Pages.EmploymentContractWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:practice3_sokolova_22._102.Pages"
+        mc:Ignorable="d"
+        Title="EmploymentContractWindow" Height="700" Width="800">
+    <Grid Margin="10">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <StackPanel Orientation="Vertical" Grid.Row="0" Margin="0,0,0,10">
+            <TextBlock Text="Сотрудник:" FontWeight="Bold"/>
+            <TextBlock Name="EmployeeNameTextBlock" Margin="0,0,0,5"/>
+            <TextBlock Text="Должность:" FontWeight="Bold"/>
+            <TextBlock Name="EmployeePositionTextBlock" Margin="0,0,0,5"/>
+            <TextBlock Text="Отдел:" FontWeight="Bold"/>
+            <TextBlock Name="DepartmentTextBlock" Margin="0,0,0,10"/>
+        </StackPanel>
+
+        <StackPanel Grid.Row="1" VerticalAlignment="Top">
+            <TextBlock Text="Номер договора:"/>
+            <TextBox Name="ContractNumberTextBox" Margin="0,0,0,5"/>
+
+            <TextBlock Text="Город:"/>
+            <TextBox Name="CityTextBox" Margin="0,0,0,5"/>
+
+            <StackPanel Orientation="Horizontal">
+                <StackPanel>
+                    <TextBlock Text="День:"/>
+                    <TextBox Name="ContractDayTextBox" Margin="0,0,0,5"/>
+                </StackPanel>
+                <StackPanel>
+                    <TextBlock Text="Месяц:"/>
+                    <TextBox Name="ContractMonthTextBox" Margin="0,0,0,5"/>
+                </StackPanel>
+                <StackPanel>
+                    <TextBlock Text="Год:"/>
+                    <TextBox Name="ContractYearTextBox" Margin="0,0,0,5"/>
+                </StackPanel>
+            </StackPanel>
+
+            <TextBlock Text="Работодатель (название):"/>
+            <TextBox Name="EmployerNameTextBox" Margin="0,0,0,5"/>
+
+            <TextBlock Text="Генеральный директор (ФИО):"/>
+            <TextBox Name="CEONameTextBox" Margin="0,0,0,5"/>
+
+            <TextBlock Text="Испытательный срок (мес):"/>
+            <TextBox Name="TestPeriodTextBox" Margin="0,0,0,5"/>
+
+            <TextBlock Text="Зарплата сотрудника (руб):"/>
+            <TextBox Name="EmployeeSalaryTextBox" Margin="0,0,0,5"/>
+        </StackPanel>
+
+        <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Grid.Row="2" Margin="0,10,0,0">
+            <Button Content="Создать договор" Margin="0,0,10,0" Width="130" Click="Button_Click"/>
+            <Button Content="Отмена" Click="Button_Click_1"/>
+        </StackPanel>
+
+    </Grid>
+</Window>

@@ -9,21 +9,29 @@
       Title="Agent" Background="White">
 
     <Grid>
-        <Border BorderBrush="Black" BorderThickness="1">
-            <Grid>
-                <StackPanel Orientation="Vertical">
-                    <Image Width="120" Height="120" HorizontalAlignment="Left" Margin="50, 10, 0, 5" Source="D:\РПМ\practice3_sokolova_22.102\practice3_sokolova_22.102\Resources\noPhoto.jpg"/>
-                    <TextBlock Text="Турагент" Margin="80, 0, 0, 10"/>
-                    <TextBlock Text="{Binding surname}" FontWeight="Bold" Margin="85, 0, 0, 0"/>
-                    <TextBlock Text="{Binding name}" FontWeight="Bold" Margin="94, 0, 0, 0"/>
-                    <TextBlock Text="{Binding patronymic}" FontWeight="Bold" Margin="80, 0, 0, 0"/>
-                    <TextBlock Text="{Binding Path=Contacts.email_address}" Margin="68, 10, 0, 0"/>
-                    <StackPanel Orientation="Horizontal">
-                        <Button x:Name="btnChangeAgent" Content="Перейти" Margin="60, 15, 0, 0" Click="btnChangeAgent_Click"/>
-                    </StackPanel>
-                </StackPanel>
-
-            </Grid>
-        </Border>
+        <FlowDocumentReader x:Name="flowDocumentReader" Grid.Row="1" ViewingMode="Scroll">
+            <FlowDocument PageWidth="Auto">
+                <BlockUIContainer>
+                    <Grid>
+                        <Border BorderBrush="Black" BorderThickness="1">
+                            <StackPanel Orientation="Vertical">
+                                <Image Width="120" Height="120" HorizontalAlignment="Left" Margin="50, 10, 0, 5" Source="D:\РПМ\practice3_sokolova_22.102\practice3_sokolova_22.102\Resources\noPhoto.jpg"/>
+                                <TextBlock Text="Турагент" Margin="80, 0, 0, 10"/>
+                                <TextBlock Text="{Binding surname}" FontWeight="Bold" Margin="85, 0, 0, 0"/>
+                                <TextBlock Text="{Binding name}" FontWeight="Bold" Margin="94, 0, 0, 0"/>
+                                <TextBlock Text="{Binding patronymic}" FontWeight="Bold" Margin="80, 0, 0, 0"/>
+                                <TextBlock Text="{Binding Path=Contacts.email_address}" Margin="68, 10, 0, 0"/>
+                                <StackPanel Orientation="Horizontal">
+                                    <Button x:Name="btnChangeAgent" Content="Перейти" Margin="60, 15, 0, 0" Click="btnChangeAgent_Click"/>
+                                </StackPanel>
+                                <StackPanel Orientation="Horizontal">
+                                    <Button x:Name="btnPrintList" Content="Печать списка" Margin="60, 25, 0, 0" Click="btnPrintList_Click"/>
+                                </StackPanel>
+                            </StackPanel>
+                        </Border>
+                    </Grid>
+                </BlockUIContainer>
+            </FlowDocument>           
+        </FlowDocumentReader>
     </Grid>
 </Page>

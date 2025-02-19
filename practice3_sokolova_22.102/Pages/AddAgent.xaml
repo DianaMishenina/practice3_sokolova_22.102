@@ -5,63 +5,75 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:practice3_sokolova_22._102.Pages"
       mc:Ignorable="d" 
-      Title="AddAgent" Background="White"  Height="600" Width="851">
+      Title="AddAgent" Background="White"  Height="600" Width="990">
 
     <Grid>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="155*"/>
-            <ColumnDefinition Width="619*"/>
-        </Grid.ColumnDefinitions>
+        <FlowDocumentReader x:Name="flowDocumentReader" Grid.Row="1" ViewingMode="Scroll">
+            <FlowDocument PageWidth="Auto">
+                <BlockUIContainer>
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="155*"/>
+                            <ColumnDefinition Width="619*"/>
+                        </Grid.ColumnDefinitions>
+                        
+                        <StackPanel Orientation="Horizontal" Grid.ColumnSpan="2" Margin="0,0,-49,-58">
 
-        <StackPanel Orientation="Horizontal" Grid.ColumnSpan="2" Margin="0,0,-49,-58">
+                            <StackPanel Orientation="Vertical">
+                                <TextBlock Text="Фамилия" Margin="10, 12, 180, 0"/>
+                                <TextBlock Text="Имя" Margin="10, 12, 0, 0"/>
+                                <TextBlock Text="Отчество*" Margin="10, 12, 0, 0"/>
+                                <TextBlock Text="Email" Margin="10, 12, 0, 0"/>
+                                <TextBlock Text="Телефон" Margin="10, 12, 0, 0"/>
+                                <TextBlock Text="Дополнительный телефон*" Margin="10, 12, 0, 0"/>
+                                <TextBlock Text="Дaта рождения" Margin="10, 24, 0, 0"/>
+                                <TextBlock Text="Пол" Margin="10, 30, 0, 0"/>
+                                <TextBlock Text="Статус" Margin="10, 20, 0, 0"/>
+                                <TextBlock Text="Опыт работы" Margin="10, 11, 0, 0"/>
+                                <TextBlock Text="Серия паспорта" Margin="10, 11, 0, 0"/>
+                                <TextBlock Text="Номер паспорта" Margin="10, 12, 0, 0"/>
+                                <TextBlock Text="Логин" Margin="10, 12, 0, 0"/>
+                                <TextBlock Text="Пароль" Margin="10, 12, 0, 0"/>
+                                <TextBlock x:Name="tblField" Text="*не обязательное поле" Margin="10, 50, 0, 0"/>
+                            </StackPanel>
+                            <StackPanel Orientation="Vertical" Width="138">
+                                <TextBox Name="tbSurname" FontWeight="Bold" Margin="0, 10, 0, 0"/>
+                                <TextBox Name="tbName" FontWeight="Bold" Margin="0, 10, 0, 0"/>
+                                <TextBox Name="tbPatronymic" FontWeight="Bold" Margin="0, 10, 0, 0"/>
+                                <TextBox Name="tbEmail" Margin="0, 10, 0, 0"/>
+                                <TextBox Name="tbPhone" Margin="0, 10, 0, 0"/>
+                                <TextBox Name="tbExtraPhone" Margin="0, 12, 0, 0"/>
+                                <DatePicker Name="dpBirthday" Margin="0, 10, 0, 0"/>
 
-            <StackPanel Orientation="Vertical">
-                <TextBlock Text="Фамилия" Margin="10, 12, 180, 0"/>
-                <TextBlock Text="Имя" Margin="10, 12, 0, 0"/>
-                <TextBlock Text="Отчество*" Margin="10, 12, 0, 0"/>
-                <TextBlock Text="Email" Margin="10, 12, 0, 0"/>
-                <TextBlock Text="Телефон" Margin="10, 12, 0, 0"/>
-                <TextBlock Text="Дополнительный телефон*" Margin="10, 12, 0, 0"/>
-                <TextBlock Text="Дaта рождения" Margin="10, 24, 0, 0"/>
-                <TextBlock Text="Пол" Margin="10, 30, 0, 0"/>
-                <TextBlock Text="Статус" Margin="10, 20, 0, 0"/>
-                <TextBlock Text="Опыт работы" Margin="10, 11, 0, 0"/>
-                <TextBlock Text="Серия паспорта" Margin="10, 11, 0, 0"/>
-                <TextBlock Text="Номер паспорта" Margin="10, 12, 0, 0"/>
-                <TextBlock Text="Логин" Margin="10, 12, 0, 0"/>
-                <TextBlock Text="Пароль" Margin="10, 12, 0, 0"/>
-                <TextBlock Text="*не обязательное поле" Margin="10, 50, 0, 0"/>
-            </StackPanel>
-            <StackPanel Orientation="Vertical" Width="138">
-                <TextBox Name="tbSurname" FontWeight="Bold" Margin="0, 10, 0, 0"/>
-                <TextBox Name="tbName" FontWeight="Bold" Margin="0, 10, 0, 0"/>
-                <TextBox Name="tbPatronymic" FontWeight="Bold" Margin="0, 10, 0, 0"/>
-                <TextBox Name="tbEmail" Margin="0, 10, 0, 0"/>
-                <TextBox Name="tbPhone" Margin="0, 10, 0, 0"/>
-                <TextBox Name="tbExtraPhone" Margin="0, 12, 0, 0"/>
-                <DatePicker Name="dpBirthday" Margin="0, 10, 0, 0"/>
-                
-                <StackPanel Orientation="Horizontal" Margin="0, 14, 0, 0">
-                    <RadioButton x:Name="rbMale" Content="Муж" Margin="0, 5, 0, 0" IsChecked="True"/>
-                    <RadioButton x:Name="rbFem" Content="Жен" Margin="20, 5, 0, 0"/>
-                </StackPanel>
-                
-                <TextBlock Text="Турагент" Margin="0, 8, 0, 0"/>
-                
-                <TextBox Name="tbExp" Margin="0, 10, 0, 0"/>
-                <TextBox Name="tbPassportSeries" Margin="0, 10, 0, 0"/>
-                <TextBox Name="tbPassportNumber" Margin="0, 10, 0, 0"/>
-                <TextBox Name="tbLogin" Margin="0, 10, 0, 0"/>
-                <TextBox Name="tbPassword" Margin="0, 10, 0, 0"/>
-                <Button Name="btnClear" Content="Очистить" Margin="0, 38, 0, 0" Click="btnClear_Click"/>
-            </StackPanel>
+                                <StackPanel Orientation="Horizontal" Margin="0, 14, 0, 0">
+                                    <RadioButton x:Name="rbMale" Content="Муж" Margin="0, 5, 0, 0" IsChecked="True"/>
+                                    <RadioButton x:Name="rbFem" Content="Жен" Margin="20, 5, 0, 0"/>
+                                </StackPanel>
 
-            <StackPanel Orientation="Vertical">
-                <Image Width="120" Height="120" Margin="65, 0, 0, 0" Source="D:\РПМ\practice3_sokolova_22.102\practice3_sokolova_22.102\Resources\noPhoto.jpg"/>
+                                <TextBlock Text="Турагент" Margin="0, 8, 0, 0"/>
 
-                <Button x:Name="btnAddPhoto" Content="Добавить фото" Margin="65, 50, 0, 0"/>
-                <Button x:Name="btnAddAgent" Content="Добавить турагента" Margin="70, 308, 0, 0" Click="btnAddAgent_Click" Width="179" />
-            </StackPanel>
-        </StackPanel>
+                                <TextBox Name="tbExp" Margin="0, 10, 0, 0"/>
+                                <TextBox Name="tbPassportSeries" Margin="0, 10, 0, 0"/>
+                                <TextBox Name="tbPassportNumber" Margin="0, 10, 0, 0"/>
+                                <TextBox Name="tbLogin" Margin="0, 10, 0, 0"/>
+                                <TextBox Name="tbPassword" Margin="0, 10, 0, 0"/>
+                                <Button Name="btnClear" Content="Очистить" Margin="0, 39, 0, 0" Click="btnClear_Click"/>
+                            </StackPanel>
+
+                            <StackPanel Orientation="Vertical">
+                                <Image Width="120" Height="120" Margin="65, 0, 0, 0" Source="D:\РПМ\practice3_sokolova_22.102\practice3_sokolova_22.102\Resources\noPhoto.jpg"/>
+
+                                <Button x:Name="btnAddPhoto" Content="Добавить фото" Margin="65, 50, 0, 0"/>
+                                <Button x:Name="btnAddAgent" Content="Добавить турагента" Margin="70, 308, 0, 0" Click="btnAddAgent_Click" Width="179" />
+                            </StackPanel>
+                            <StackPanel>
+                                <Button Name="btnEmploymentContract" Content="Сформировать трудовой договор" Margin="60, 465, 0, 0" Width="240" Click="btnEmploymentContract_Click"/>
+                                <Button x:Name="btnPrintPersonalFile" Content="Печать личного дела" Margin="55, 10, 0, 0" Width="160" Click="btnPrintPersonalFile_Click"/>
+                            </StackPanel>
+                        </StackPanel>
+                    </Grid>
+                </BlockUIContainer>
+            </FlowDocument>
+        </FlowDocumentReader>
     </Grid>
 </Page>

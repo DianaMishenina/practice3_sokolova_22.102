@@ -45,5 +45,27 @@ namespace practice3_sokolova_22._102.Pages
         {
             NavigationService.Navigate(new ChangeAgent(agent, _password));
         }
+
+        private void btnPrintList_Click(object sender, RoutedEventArgs e)
+        {
+            FlowDocument doc = flowDocumentReader.Document;
+
+            if (doc == null)
+            {
+                MessageBox.Show("Документ не найден");
+                return;
+            }
+
+            PrintDialog pd = new PrintDialog();
+            btnChangeAgent.Visibility = Visibility.Hidden;
+            btnPrintList.Visibility = Visibility.Hidden;
+
+            if (pd.ShowDialog() == true)
+            {
+                IDocumentPaginatorSource idpSource = doc;
+
+                pd.PrintDocument(idpSource.DocumentPaginator, "Список сотрудников");
+            }
+        }
     }
 }

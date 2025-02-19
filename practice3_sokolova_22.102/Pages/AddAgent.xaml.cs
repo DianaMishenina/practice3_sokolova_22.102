@@ -15,11 +15,13 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using Xceed.Words.NET;
 
 namespace practice3_sokolova_22._102.Pages
 {
     public partial class AddAgent : Page
     {
+        Agents agent;
         public AddAgent()
         {
             InitializeComponent();
@@ -131,6 +133,7 @@ namespace practice3_sokolova_22._102.Pages
                     authorization_id = authorization_id
                 };
                 helper.AddAgent(newAgent);
+                agent = newAgent;
                 
             }
             catch (Exception ex)
@@ -139,14 +142,44 @@ namespace practice3_sokolova_22._102.Pages
             }
         }
 
-        //public void SB(List<System.ComponentModel.DataAnnotations.ValidationResult> results)
-        //{
-        //    StringBuilder sb = new StringBuilder();
-        //    foreach (var error in results)
-        //    {
-        //        sb.AppendLine(error.ErrorMessage);
-        //    }
-        //    MessageBox.Show(sb.ToString());
-        //}
+        private void btnPrintPersonalFile_Click(object sender, RoutedEventArgs e)
+        {
+            if (tbName.Text != string.Empty 
+                && tbSurname.Text != string.Empty 
+                && tbEmail.Text != string.Empty 
+                && tbPhone.Text != string.Empty
+                && dpBirthday.Text != string.Empty
+                && tbExp.Text != string.Empty
+                && tbPassportSeries.Text != string.Empty
+                && tbPassportNumber.Text != string.Empty
+                && tbLogin.Text != string.Empty
+                && tbPassword.Text != string.Empty)
+            {
+                NavigationService.Navigate
+                    (new PersonalFile
+                    (tbSurname.Text, 
+                    tbName.Text, 
+                    tbPatronymic.Text, 
+                    tbEmail.Text, 
+                    tbPhone.Text, 
+                    tbExtraPhone.Text, 
+                    dpBirthday.Text,
+                    tbExp.Text,
+                    tbPassportSeries.Text,
+                    tbPassportNumber.Text,
+                    tbLogin.Text,
+                    tbPassword.Text));
+            }
+            else
+            {
+                MessageBox.Show("Сначала заполните поля");
+            }
+        }
+
+        private void btnEmploymentContract_Click(object sender, RoutedEventArgs e)
+        {
+            EmploymentContractWindow contractWindow = new EmploymentContractWindow(agent, tbPassportSeries.Text, tbPassportNumber.Text);
+            bool? result = contractWindow.ShowDialog();
+        }
     }
 }
